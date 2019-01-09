@@ -24,6 +24,7 @@ def repositories():
         name = "com_github_bazelbuild_buildtools",
         strip_prefix = "buildtools-0.19.2.1",
         url = "https://github.com/bazelbuild/buildtools/archive/0.19.2.1.zip",
+        sha256 = "9176a7df34dbed2cf5171eb56271868824560364e60644348219f852f593ae79",
     )
 
     http_archive(
@@ -31,6 +32,7 @@ def repositories():
         strip_prefix = "rules_scala-3f430854319e871429074c6611ca4413657135f7",
         type = "zip",
         url = "https://github.com/bazelbuild/rules_scala/archive/3f430854319e871429074c6611ca4413657135f7.zip",
+        sha256 = "424571b60f7ec8d77f8fc6ba07c4fb51856732d5cd4f3360a8e01ebb1b3be365",
     )
 
     http_archive(
