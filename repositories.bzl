@@ -1,14 +1,48 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+def _maybe(repo, name, **kwargs):
+  if name not in native.existing_rules():
+    repo(name = name, **kwargs)
 
 def bazel_skylib():
-    http_archive(
+    _maybe(http_archive, 
         name = "bazel_skylib",
         url = "https://github.com/bazelbuild/bazel-skylib/archive/0.6.0.tar.gz",
         sha256 = "eb5c57e4c12e68c0c20bc774bfbc60a568e800d025557bc4ea022c6479acc867",
         strip_prefix = "bazel-skylib-0.6.0",
     )
 
+def org_golang_x_tools():
+   _maybe(
+        http_archive,
+        name = "org_golang_x_tools",
+        # master^1, as of 2018-11-02 (master is currently broken)
+        urls = ["https://codeload.github.com/golang/tools/zip/92b943e6bff73e0dfe9e975d94043d8f31067b06"],
+        strip_prefix = "tools-92b943e6bff73e0dfe9e975d94043d8f31067b06",
+        type = "zip",
+        patches = [
+            "@io_bazel_rules_go//third_party:org_golang_x_tools-gazelle.patch",
+            "@io_bazel_rules_go//third_party:org_golang_x_tools-extras.patch",
+        ],
+        patch_args = ["-p1"],
+        # gazelle args: -go_prefix golang.org/x/tools
+    )
+
+def org_golang_x_sys():
+   _maybe(
+        git_repository,
+        name = "org_golang_x_sys",
+        remote = "https://github.com/golang/sys",
+        commit = "e4b3c5e9061176387e7cea65e4dc5853801f3fb7",  # master as of 2018-09-28
+        patches = ["@io_bazel_rules_go//third_party:org_golang_x_sys-gazelle.patch"],
+        patch_args = ["-p1"],
+        # gazelle args: -go_prefix golang.org/x/sys
+        )
+
 def io_bazel_rules_go():
+    org_golang_x_tools()
+    org_golang_x_sys()
     http_archive(
         name = "io_bazel_rules_go",
         sha256 = "7be7dc01f1e0afdba6c8eb2b43d2fa01c743be1b9273ab1eaf6c233df078d705",
