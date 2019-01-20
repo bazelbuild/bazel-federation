@@ -3,36 +3,32 @@ load(":repositories.bzl", "repositories")
 
 repositories()
 
-load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains")
+load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
 
 go_register_toolchains()
 
-#load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
-#go_rules_dependencies()
+gazelle_dependencies()
 
-#go_register_toolchains()
+load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
 
-#load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+buildifier_dependencies()
 
-#gazelle_dependencies()
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
 
-#load("@com_github_bazelbuild_buildtools//buildifier:deps.bzl", "buildifier_dependencies")
+scala_repositories()
 
-#buildifier_dependencies()
+load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
 
-#load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
+scala_register_toolchains()
 
-#scala_repositories()
+load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
 
-#load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+rust_repositories()
 
-#scala_register_toolchains()
+load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
 
-#load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
-
-#rust_repositories()
-
-#load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
-
-#bazel_version(name = "bazel_version")
+bazel_version(name = "bazel_version")

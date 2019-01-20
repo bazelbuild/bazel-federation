@@ -40,6 +40,7 @@ def org_golang_x_sys():
         # gazelle args: -go_prefix golang.org/x/sys
         )
 
+
 def io_bazel_rules_go():
     org_golang_x_tools()
     org_golang_x_sys()
