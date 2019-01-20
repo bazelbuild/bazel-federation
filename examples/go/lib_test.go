@@ -12,14 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package lib
 
 import (
-        "fmt"
+	"testing"
 
-        "github.com/bazelbuild/bazel-federation/examples/go/lib"
+	"github.com/bazelbuild/bazel-federation/examples/go/lib"
 )
 
-func main() {
-        fmt.Println(lib.Text())
+func TestText(t *testing.T) {
+	expected := "Hello world"
+	result := lib.Text()
+
+	if result != expected {
+		t.Errorf("got: %s, want: %s", result, expected)
+	}
 }

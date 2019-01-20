@@ -12,14 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package lib
 
-import (
-        "fmt"
-
-        "github.com/bazelbuild/bazel-federation/examples/go/lib"
-)
-
-func main() {
-        fmt.Println(lib.Text())
+func Text() string {
+	return "Hello world"
 }
