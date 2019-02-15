@@ -20,3 +20,4 @@ to recommended rules. If changes are needed to keep the examples working, we may
 push back and suggest a change to the rule; or the diff will serve as an example
 for anyone updating their code.
 
+[Design doc](https://docs.google.com/document/d/1dpdZjNCdXZE7SWXKuDQHxHDfXJyXjo5JhsTo-QsudHs/)
