@@ -82,6 +82,14 @@ def io_bazel_rules_rust():
         sha256 = "ed0c81084bcc2bdcc98cfe56f384b20856840825f5e413e2b71809b61809fc87",
     )
 
+def io_bazel_rules_docker():
+    http_archive(
+        name = "io_bazel_rules_docker",
+        strip_prefix = "rules_docker-90b9ba4b289319c3f642e6a5c49f0086a0022ef0",
+        url = "https://github.com/bazelbuild/rules_docker/archive/90b9ba4b289319c3f642e6a5c49f0086a0022ef0.tar.gz",
+        sha256 = "a6860dc4a1712eb92302a377868517e73e1cef8c84f54860af9a3f1a25c4b69b",
+    )
+
 def repositories():
     bazel_skylib()
     io_bazel_rules_go()
@@ -89,3 +97,4 @@ def repositories():
     com_github_bazelbuild_buildtools()
     io_bazel_rules_scala()
     io_bazel_rules_rust()
+    io_bazel_rules_docker()
