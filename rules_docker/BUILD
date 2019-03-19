@@ -1,6 +1,5 @@
 load("@io_bazel_rules_docker//container:container.bzl", "container_image")
-
-exports_files(glob(["*.yaml"]))
+load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
 
 container_image(
     name = "basic_alpine",
@@ -10,9 +9,6 @@ container_image(
 )
 
 # Tests
-
-load("@io_bazel_rules_docker//contrib:test.bzl", "container_test")
-
 container_test(
     name = "basic_alpine_bazel_test",
     configs = [":basic_alpine.yaml"],
