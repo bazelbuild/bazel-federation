@@ -75,6 +75,7 @@ def io_bazel_rules_scala():
     )
 
 def io_bazel_rules_rust():
+    bazel_skylib()
     http_archive(
         name = "io_bazel_rules_rust",
         strip_prefix = "rules_rust-f32695dcd02d9a19e42b9eb7f29a24a8ceb2b858",
