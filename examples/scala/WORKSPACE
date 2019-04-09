@@ -1,0 +1,18 @@
+workspace(name = "bazel_federation_scala")
+
+local_repository(name = "bazel_federation",
+                 path = "../..",
+)
+
+load("@bazel_federation//:repositories.bzl", "io_bazel_rules_scala")
+
+io_bazel_rules_scala()
+
+# TODO: this in fact brings in a bunch of maven depenedencies.
+load("@io_bazel_rules_scala//scala:scala.bzl", "scala_repositories")
+scala_repositories()
+
+load("@io_bazel_rules_scala//scala:toolchains.bzl", "scala_register_toolchains")
+scala_register_toolchains()
+
+
