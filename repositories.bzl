@@ -15,14 +15,6 @@ def bazel_skylib():
         sha256 = "2ef429f5d7ce7111263289644d233707dba35e39696377ebab8b0bc701f7818e",
     )
 
-def bazel_skydoc():
-    _maybe(
-        http_archive,
-        name = "io_bazel_skydoc",
-        url = "https://github.com/bazelbuild/skydoc/archive/0.3.0.tar.gz",
-        sha256 = "c2d66a0cc7e25d857e480409a8004fdf09072a1bd564d6824441ab2f96448eea",
-    )
-
 
 # The @federation markers are an experiment in how to pick up dependency stanzas
 # from the rule sets. Each rule set should have a deps.bzl file. Inside those,
@@ -62,16 +54,6 @@ def rules_pkg_dependencies():
 def rules_pkg_register_toolchains():
     pass
 
-
-# WARNING: Temporarily redirected repo.
-def rules_pkg():
-    rules_pkg_dependencies()
-    _maybe(
-        http_archive,
-        name = "rules_pkg",
-        url = "https://github.com/aiuto/rules_pkg/releases/download/0.2.0/rules_pkg-0.2.0.tar.gz",
-        sha256 = "e96bfd0433630ab23aa1fa26949f3297e033a1277ff82515e4e1c261f0ffd923",
-    )
 # @federation: END @rules_pkg
 
 
