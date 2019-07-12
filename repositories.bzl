@@ -16,6 +16,15 @@ def bazel_skylib():
     )
 
 
+def bazel_skydoc():
+    _maybe(
+        http_archive,
+        name = "io_bazel_skydoc",
+        url = "https://github.com/bazelbuild/skydoc/archive/0.3.0.tar.gz",
+        sha256 = "c2d66a0cc7e25d857e480409a8004fdf09072a1bd564d6824441ab2f96448eea",
+   )
+
+
 # The @federation markers are an experiment in how to pick up dependency stanzas
 # from the rule sets. Each rule set should have a deps.bzl file. Inside those,
 # there will be the @federation markers. Those must be designed so they can
