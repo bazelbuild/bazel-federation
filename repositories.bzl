@@ -1,6 +1,9 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
+# TODO(aiuto): This can not exist here, because it loads bazel_skydoc, which is not defined yet
+# TODO(aiuto): load("@bazel_federation//repo_deps:bazel_skylib.bzl", "bazel_skylib_deps")
+
 # Repositories in this file have been tested with Bazel 0.26.0.
 
 def _maybe(repo, name, **kwargs):
@@ -8,12 +11,24 @@ def _maybe(repo, name, **kwargs):
         repo(name = name, **kwargs)
 
 def bazel_skylib():
+    if not native.existing_rule("bazel_skylib"):
+        http_archive(
+            name = "bazel_skylib",
+            url = "https://github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
+            sha256 = "1dde365491125a3db70731e25658dfdd3bc5dbdfd11b840b3e987ecf043c7ca0",
+        )
+        # TODO(aiuto): We should be able to call bazel_skylib_deps() here. That would
+        # TODO(aiuto): register the toolchains. But we can not be
+        # TODO(aiuto): bazel_skylib_deps()
+
+def bazel_skydoc():
     _maybe(
         http_archive,
-        name = "bazel_skylib",
-        url = "https://github.com/bazelbuild/bazel-skylib/releases/download/0.8.0/bazel-skylib.0.8.0.tar.gz",
-        sha256 = "2ef429f5d7ce7111263289644d233707dba35e39696377ebab8b0bc701f7818e",
-    )
+        name = "io_bazel_skydoc",
+        url = "https://github.com/bazelbuild/skydoc/archive/0.3.0.tar.gz",
+        sha256 = "c2d66a0cc7e25d857e480409a8004fdf09072a1bd564d6824441ab2f96448eea",
+        strip_prefix = "skydoc-0.3.0",
+   )
 
 
 # The @federation markers are an experiment in how to pick up dependency stanzas
