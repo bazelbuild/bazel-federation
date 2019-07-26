@@ -11,12 +11,9 @@ load("@bazel_federation//:repositories.bzl",
 )
 
 bazel_skylib()
-# TODO(aiuto): This is ugly. Really ugly. See //repositories.bzl for why.
-# What we really need is load from within a macro to be allowed at workspace
-# construction time.
 # We can not even return the repo name and metho from the bazel_skylib()
 # method, because load takes string literals only, not variables that can be
-# a string.
+# a string. See /repositories.bzl for more info.
 load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
 bazel_skylib_setup()
 
