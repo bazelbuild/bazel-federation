@@ -1,8 +1,9 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-# TODO(aiuto): This can not exist here, because it loads bazel_skydoc, which is not defined yet
-# TODO(aiuto): load("@bazel_federation//repo_deps:bazel_skylib.bzl", "bazel_skylib_deps")
+# TODO(aiuto): This can not exist here, because it loads bazel_skydoc, which
+#     is not defined yet. We get a cycle error.
+# load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
 
 # Repositories in this file have been tested with Bazel 0.26.0.
 
@@ -17,9 +18,12 @@ def bazel_skylib():
             url = "https://github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
             sha256 = "1dde365491125a3db70731e25658dfdd3bc5dbdfd11b840b3e987ecf043c7ca0",
         )
-        # TODO(aiuto): We should be able to call bazel_skylib_deps() here. That would
-        # TODO(aiuto): register the toolchains. But we can not be
-        # TODO(aiuto): bazel_skylib_deps()
+        # TODO(aiuto): We should be able to call bazel_skylib_setup() here.
+        #     That would register the toolchains. We can not because you can
+        #     not do the load() here.
+        # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
+        # bazel_skylib_setup()
+
 
 def bazel_skydoc():
     _maybe(
