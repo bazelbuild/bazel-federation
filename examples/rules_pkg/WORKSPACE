@@ -1,0 +1,12 @@
+workspace(name = "example")
+
+local_repository(
+    name = "bazel_federation",
+    path = "../..",
+)
+
+load("@bazel_federation//:repositories.bzl",
+     "rules_pkg",
+)
+
+rules_pkg()
