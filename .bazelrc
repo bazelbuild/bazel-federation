@@ -1,0 +1,38 @@
+# Incompatible flags to be flipped for 1.0
+# TODO(aiuto): The commented out ones are note available in 0.28.1. Enable
+# them when 0.29 comes out.
+build --incompatible_auto_configure_host_platform
+build --incompatible_disable_legacy_proto_provider
+build --incompatible_disable_native_android_rules
+build --incompatible_disable_nocopts
+# build --incompatible_disable_partition_default_parameter
+build --incompatible_disable_proto_source_root
+build --incompatible_disable_static_cc_toolchains
+build --incompatible_disallow_empty_glob
+# build --incompatible_disallow_hashing_frozen_mutables
+build --incompatible_disallow_legacy_javainfo
+build --incompatible_disallow_legacy_java_provider
+build --incompatible_disallow_rule_execution_platform_constraints_allowed
+# build --incompatible_disallow_split_empty_separator
+# build --incompatible_disallow_unverified_http_downloads
+build --incompatible_enable_profile_by_default
+# build --incompatible_load_cc_rules_from_bzl
+build --incompatible_load_java_rules_from_bzl
+# build --incompatible_load_proto_rules_from_bzl
+# build --incompatible_load_python_rules_from_bzl
+build --incompatible_make_thinlto_command_lines_standalone
+build --incompatible_no_target_output_group
+build --incompatible_remap_main_repo
+build --incompatible_remove_legacy_whole_archive
+build --incompatible_require_java_toolchain_header_compiler_direct
+build --incompatible_restrict_attribute_names
+build --incompatible_restrict_named_params
+build --incompatible_restrict_string_escapes
+# build --incompatible_skip_genfiles_symlink
+build --incompatible_use_aapt2_by_default
+# build --incompatible_use_native_patch
+build --incompatible_use_specific_tool_files
+# build --incompatible_windows_bashless_run_command
+build --incompatible_windows_native_test_wrapper
+# This is not possible to set. See https://github.com/bazelbuild/bazel/issues/9065
+# build --@bazel_tools//tools/build_defs/pkg:incompatible_no_build_defs_pkg
