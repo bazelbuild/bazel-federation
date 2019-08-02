@@ -1,7 +1,7 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-# TODO(aiuto): This can not exist here, because it loads bazel_skydoc, which
+# TODO(aiuto): This can not exist here, because it loads bazel_skylib, which
 #     is not defined yet. We get a cycle error.
 # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
 
@@ -24,7 +24,7 @@ def bazel_skylib():
         # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
         # bazel_skylib_setup()
 
-def bazel_skydoc():
+def bazel_stardoc():
     _maybe(
         http_archive,
         name = "io_bazel_skydoc",
