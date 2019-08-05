@@ -7,7 +7,7 @@ local_repository(
 
 load("@bazel_federation//:repositories.bzl",
      "bazel_skylib",
-     "bazel_skydoc"
+     "bazel_stardoc"
 )
 
 bazel_skylib()
@@ -17,4 +17,4 @@ bazel_skylib()
 load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
 bazel_skylib_setup()
 
-bazel_skydoc()
+bazel_stardoc()
