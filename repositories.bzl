@@ -25,6 +25,7 @@ def bazel_skylib():
         # bazel_skylib_setup()
 
 def bazel_stardoc():
+    rules_java()
     _maybe(
         http_archive,
         name = "io_bazel_skydoc",
@@ -158,6 +159,16 @@ def io_bazel_rules_rust():
         url = "https://github.com/bazelbuild/rules_rust/archive/f32695dcd02d9a19e42b9eb7f29a24a8ceb2b858.tar.gz",
         sha256 = "ed0c81084bcc2bdcc98cfe56f384b20856840825f5e413e2b71809b61809fc87",
     )
+
+
+def rules_java():
+    _maybe(
+        http_archive,
+        name = "rules_java",
+        url = "https://github.com/bazelbuild/rules_java/releases/download/0.1.0/rules_java-0.1.0.tar.gz",
+        sha256 = "52423cb07384572ab60ef1132b0c7ded3a25c421036176c0273873ec82f5d2b2",
+    )
+
 
 def repositories():
     bazel_skylib()

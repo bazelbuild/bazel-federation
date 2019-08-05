@@ -18,3 +18,8 @@ load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
 bazel_skylib_setup()
 
 bazel_stardoc()
+# This is another usability problem. stardoc uses java, but why should I have
+# to know that as a user. I have to explicitly add this
+# this a the workspace
+load("@bazel_federation//setup:rules_java.bzl", "rules_java_setup")
+rules_java_setup()
