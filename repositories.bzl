@@ -161,7 +161,20 @@ def io_bazel_rules_rust():
     )
 
 
+def rules_cc():
+    bazel_skylib()
+    _maybe(
+        http_archive,
+        name = "rules_cc",
+        url = "https://github.com/bazelbuild/rules_cc/archive/b7fe9697c0c76ab2fd431a891dbb9a6a32ed7c3e.zip",
+        sha256 = "67412176974bfce3f4cf8bdaff39784a72ed709fc58def599d1f68710b58d68b",
+        strip_prefix = "rules_cc-b7fe9697c0c76ab2fd431a891dbb9a6a32ed7c3e",
+        type = "zip",
+    )
+
+
 def rules_java():
+    bazel_skylib()
     _maybe(
         http_archive,
         name = "rules_java",
