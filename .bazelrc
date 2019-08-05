@@ -28,7 +28,8 @@ build --incompatible_disallow_rule_execution_platform_constraints_allowed
 build --incompatible_enable_profile_by_default
 
 # build --incompatible_load_cc_rules_from_bzl
-build --incompatible_load_java_rules_from_bzl
+# 0.29??
+# build --incompatible_load_java_rules_from_bzl
 # build --incompatible_load_proto_rules_from_bzl
 # build --incompatible_load_python_rules_from_bzl
 
