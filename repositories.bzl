@@ -162,11 +162,6 @@ def io_bazel_rules_rust():
 
 
 def rules_java():
-    # TEMP: DO NOT SUBMIT
-    #native.local_repository(
-    #    name = "rules_java",
-    #    path = "../rules_java-0.1.0.tar.gz",
-    #)
     _maybe(
         http_archive,
         name = "rules_java",

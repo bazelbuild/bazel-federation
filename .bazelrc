@@ -10,7 +10,7 @@ build --incompatible_disable_nocopts
 build --incompatible_disable_proto_source_root
 build --incompatible_disable_static_cc_toolchains
 
-# This breaks java toolchain 
+# This breaks the java toolchain
 # build --incompatible_disallow_empty_glob
 
 # 0.29
