@@ -48,8 +48,14 @@ cc_library(
     hdrs = ["hello_lib.h"],
 )
 
+java_binary(
+    name = "HelloInJava",
+    srcs = ["Hello.java"],
+    deps = [":hello_lib_java"],
+    main_class = "example.Hello",
+)
+
 java_library(
     name = "hello_lib_java",
     srcs = ["HelloLib.java"],
 )
-
