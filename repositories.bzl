@@ -80,10 +80,10 @@ def rules_pkg():
         http_archive,
         name = "rules_pkg",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/rules_pkg-0.2.0.tar.gz",
-            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.0/rules_pkg-0.2.0.tar.gz",
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/rules_pkg-0.2.1.tar.gz",
+            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.1/rules_pkg-0.2.1.tar.gz",
         ],
-        sha256 = "5bdc04987af79bd27bc5b00fe30f59a858f77ffa0bd2d8143d5b31ad8b1bd71c",
+        sha256 = "04c1eab736f508e94c297455915b6371432cbc4106765b5252b444d1656db051",
     )
 
 # @federation: END @rules_pkg
