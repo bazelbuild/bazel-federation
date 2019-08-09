@@ -1,0 +1,49 @@
+platforms:
+  macos:
+    build_targets:
+    - '@rules_cc//...'
+    setup:
+    - python3.7 create_project_workspace.py --project=rules_cc
+    test_flags:
+    - --test_timeout=300
+    test_targets:
+    - '@rules_cc//...'
+  ubuntu1604:
+    build_targets:
+    - '@rules_cc//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_cc
+    test_flags:
+    - --test_timeout=300
+    test_targets:
+    - '@rules_cc//...'
+  ubuntu1804:
+    build_targets:
+    - '@rules_cc//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_cc
+    test_flags:
+    - --test_timeout=300
+    test_targets:
+    - '@rules_cc//...'
+  ubuntu1804_nojava:
+    build_flags:
+    - --javabase=@openjdk11_linux_archive//:runtime
+    build_targets:
+    - '@rules_cc//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_cc
+    test_flags:
+    - --test_timeout=300
+    - --javabase=@openjdk11_linux_archive//:runtime
+    test_targets:
+    - '@rules_cc//...'
+  windows:
+    build_targets:
+    - '@rules_cc//...'
+    setup:
+    - python.exe create_project_workspace.py --project=rules_cc
+    test_flags:
+    - --test_timeout=300
+    test_targets:
+    - '@rules_cc//...'
