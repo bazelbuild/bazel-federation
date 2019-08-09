@@ -11,6 +11,7 @@ load("@bazel_federation//:repositories.bzl",
      "rules_cc",
      "rules_java",
      "rules_pkg",
+     "rules_python",
 )
 
 rules_cc()
@@ -20,6 +21,11 @@ rules_cc_setup()
 rules_java()
 load("@bazel_federation//setup:rules_java.bzl", "rules_java_setup")
 rules_java_setup()
+
+rules_python()
+load("@bazel_federation//setup:rules_python.bzl", "rules_python_setup")
+rules_python_setup()
+
 
 bazel_skylib()
 # We can not even return the repo name and method from the bazel_skylib()

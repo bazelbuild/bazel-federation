@@ -2,6 +2,7 @@ load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 load("@io_bazel_skydoc//stardoc:stardoc.bzl", "stardoc")
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
 load("@rules_java//java:defs.bzl", "java_library", "java_binary")
+load("@rules_python//python:defs.bzl", "py_binary")
 
 load(":my_rule.bzl", "my_rule")
 
@@ -58,4 +59,10 @@ java_binary(
 java_library(
     name = "hello_lib_java",
     srcs = ["HelloLib.java"],
+)
+
+py_binary(
+    name = "hello_in_python",
+    srcs = ["hello.py"],
+    main = "hello.py",
 )
