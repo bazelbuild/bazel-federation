@@ -252,7 +252,8 @@ def rules_scala_deps():
 
 def rules_scala():
     rules_scala_deps()
-    http_archive(
+    maybe(
+        http_archive,
         name = "io_bazel_rules_scala",
         strip_prefix = "rules_scala-300b4369a0a56d9e590d9fea8a73c3913d758e12",
         type = "zip",
