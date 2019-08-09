@@ -3,16 +3,22 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 
 
-def abseil_py():
+def _import_abseil_py(name):
     maybe(
         http_archive,
-        name = "io_abseil_py",
+        name = name,
         sha256 = "3d0f39e0920379ff1393de04b573bca3484d82a5f8b939e9e83b20b6106c9bbe",
         strip_prefix = "abseil-py-pypi-v0.7.1",
         urls = [
             "https://github.com/abseil/abseil-py/archive/pypi-v0.7.1.tar.gz",
         ],
     )
+
+def abseil_py():
+    # TODO(fweikert): remove this hack. It's currently needed since rules_cc and rule_pkg
+    # use different repository names for abseil.
+    _import_abseil_py("abseil_py")
+    _import_abseil_py("io_abseil_py")
 
 def futures_2_whl():
     maybe(
