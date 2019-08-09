@@ -9,22 +9,29 @@ load("@bazel_federation//:repositories.bzl",
      "bazel_skylib",
      "bazel_stardoc",
      "rules_cc",
+     "rules_java",
+     "rules_pkg",
 )
 
 rules_cc()
 load("@bazel_federation//setup:rules_cc.bzl", "rules_cc_setup")
 rules_cc_setup()
 
+rules_java()
+load("@bazel_federation//setup:rules_java.bzl", "rules_java_setup")
+rules_java_setup()
+
 bazel_skylib()
-# We can not even return the repo name and metho from the bazel_skylib()
+# We can not even return the repo name and method from the bazel_skylib()
 # method, because load takes string literals only, not variables that can be
 # a string. See /repositories.bzl for more info.
 load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
 bazel_skylib_setup()
 
 bazel_stardoc()
-# This is another usability problem. stardoc uses java, but why should I have
-# to know that as a user. I have to explicitly add this
-# this a the workspace
-load("@bazel_federation//setup:rules_java.bzl", "rules_java_setup")
-rules_java_setup()
+load("@bazel_federation//setup:bazel_stardoc.bzl", "bazel_stardoc_setup")
+bazel_stardoc_setup()
+
+rules_pkg()
+load("@bazel_federation//setup:rules_pkg.bzl", "rules_pkg_setup")
+rules_pkg_setup()
