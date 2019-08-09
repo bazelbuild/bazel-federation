@@ -1,0 +1,28 @@
+tasks:
+  macos:
+    build_targets:
+    - '@rules_java//...'
+    setup:
+    - python3.7 create_project_workspace.py --project=rules_java
+  ubuntu1604:
+    build_targets:
+    - '@rules_java//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_java
+  ubuntu1804:
+    build_targets:
+    - '@rules_java//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_java
+  ubuntu1804_nojava:
+    build_flags:
+    - --javabase=@openjdk11_linux_archive//:runtime
+    build_targets:
+    - '@rules_java//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_java
+  windows:
+    build_targets:
+    - '@rules_java//...'
+    setup:
+    - python.exe create_project_workspace.py --project=rules_java
