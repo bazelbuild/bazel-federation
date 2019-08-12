@@ -87,8 +87,8 @@ def get_project_name_from_url(config_url):
     match = PROJECT_REGEX.search(config_url)
     if not match:
         raise Error(
-            "Config URL '%s' does not point to a file in the bazelbuild GitHub organisation."
-            % config_url
+            "Config URL '%s' does not point to a file in the "
+            "bazelbuild GitHub organisation." % config_url
         )
     return match.group(1)
 
@@ -144,8 +144,8 @@ def update_master_config(project_name):
     master_config = load_master_config()
     if "imports" not in master_config:
         raise Error(
-            "Master presubmit configuration at '%s' does not contain any 'imports'"
-            % MASTER_CONFIG_FILE
+            "Master presubmit configuration at '%s'"
+            " does not contain any 'imports'" % MASTER_CONFIG_FILE
         )
 
     config_name = "%s.yml" % project_name
