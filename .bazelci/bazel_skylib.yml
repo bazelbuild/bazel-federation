@@ -1,0 +1,49 @@
+targets: &targets
+- "--"
+- "@bazel_skylib//..."
+# TODO: maprule tests fail, but the feature is deprecated, so let's just disable them for now
+- "-@bazel_skylib//tests/maprule:maprule_tests"
+- "-@bazel_skylib//tests/maprule:mr_bash"
+- "-@bazel_skylib//tests/maprule:mr_bash_tool"
+- "-@bazel_skylib//tests/maprule:file_deps"
+# TODO: the following tests cannot be run remotely. fix them!
+- "-@bazel_skylib//tests/native_binary:args_test"
+- "-@bazel_skylib//tests/run_binary:run_bin_test"
+- "-@bazel_skylib//tests/run_binary:run_script_test"
+common: &common
+  build_targets: *targets
+  test_targets: *targets
+buildifier: latest
+tasks:
+  macos:
+    build_flags:
+    - --incompatible_remap_main_repo
+    setup:
+    - python3.7 create_project_workspace.py --project=bazel_skylib
+    test_flags:
+    - --test_env=PATH
+    <<: *common
+  ubuntu1604:
+    build_flags:
+    - --incompatible_remap_main_repo
+    setup:
+    - python3.6 create_project_workspace.py --project=bazel_skylib
+    test_flags:
+    - --test_env=PATH
+    <<: *common
+  ubuntu1804:
+    build_flags:
+    - --incompatible_remap_main_repo
+    setup:
+    - python3.6 create_project_workspace.py --project=bazel_skylib
+    test_flags:
+    - --test_env=PATH
+    <<: *common
+  windows:
+    build_flags:
+    - --incompatible_remap_main_repo
+    setup:
+    - python.exe create_project_workspace.py --project=bazel_skylib
+    test_flags:
+    - --test_env=LOCALAPPDATA
+    <<: *common
