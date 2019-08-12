@@ -236,4 +236,3 @@ def zlib():
         strip_prefix = "zlib-1.2.11",
         urls = ["https://zlib.net/zlib-1.2.11.tar.gz"],
     )
-    native.bind(name = "zlib", actual = "@net_zlib//:zlib")
