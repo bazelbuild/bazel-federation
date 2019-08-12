@@ -1,0 +1,22 @@
+platforms:
+  macos:
+    build_targets:
+    - '@rules_python//...'
+    setup:
+    - python3.7 create_project_workspace.py --project=rules_python
+    test_targets:
+    - '@rules_python//...'
+  ubuntu1604:
+    build_targets:
+    - '@rules_python//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_python
+    test_targets:
+    - '@rules_python//...'
+  ubuntu1804:
+    build_targets:
+    - '@rules_python//...'
+    setup:
+    - python3.6 create_project_workspace.py --project=rules_python
+    test_targets:
+    - '@rules_python//...'
