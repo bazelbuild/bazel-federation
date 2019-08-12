@@ -1,2 +1,3 @@
 imports:
+- bazel_skylib.yml
 - rules_python.yml
