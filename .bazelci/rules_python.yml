@@ -1,22 +1,22 @@
+targets: &targets
+  build_targets:
+  - "@rules_python//examples/..."
+  - "@rules_python//experimental/..."
+  - "@rules_python//python/..."
+  - "@rules_python//rules_python/..."
+  - "@rules_python//tools/..."
+  test_targets:
+  - "@rules_python//..."
 platforms:
   macos:
-    build_targets:
-    - '@rules_python//...'
     setup:
     - python3.7 create_project_workspace.py --project=rules_python
-    test_targets:
-    - '@rules_python//...'
+    <<: *targets
   ubuntu1604:
-    build_targets:
-    - '@rules_python//...'
     setup:
     - python3.6 create_project_workspace.py --project=rules_python
-    test_targets:
-    - '@rules_python//...'
+    <<: *targets
   ubuntu1804:
-    build_targets:
-    - '@rules_python//...'
     setup:
     - python3.6 create_project_workspace.py --project=rules_python
-    test_targets:
-    - '@rules_python//...'
+    <<: *targets
