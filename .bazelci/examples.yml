@@ -1,42 +1,50 @@
 tasks:
   rules_pkg_macos:
     name: rules_pkg
+    working_directory: rules_pkg
     platform: macos
     build_targets:
     - "..."
   rules_pkg_ubuntu1604:
     name: rules_pkg
+    working_directory: rules_pkg
     platform: ubuntu1604
     build_targets:
     - "..."
   rules_pkg_ubuntu1804:
     name: rules_pkg
+    working_directory: rules_pkg
     platform: ubuntu1804
     build_targets:
     - "..."
   rules_pkg_windows:
     name: rules_pkg
+    working_directory: rules_pkg
     platform: windows
     build_targets:
     - "..."
 
   stardoc_macos:
     name: Stardoc
+    working_directory: stardoc
     platform: macos
     build_targets:
     - "..."
   stardoc_ubuntu1604:
     name: Stardoc
+    working_directory: stardoc
     platform: ubuntu1604
     build_targets:
     - "..."
   stardoc_ubuntu1804:
     name: Stardoc
+    working_directory: stardoc
     platform: ubuntu1804
     build_targets:
     - "..."
   stardoc_windows:
     name: Stardoc
+    working_directory: stardoc
     platform: windows
     build_targets:
     - "..."
