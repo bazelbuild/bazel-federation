@@ -220,9 +220,9 @@ def rules_python():
     maybe(
         http_archive,
         name = "rules_python",
-        strip_prefix = "rules_python-fe5e0fa208f4fc4e469a960fe8c0d46394a21c21",
-        url = "https://github.com/bazelbuild/rules_python/archive/fe5e0fa208f4fc4e469a960fe8c0d46394a21c21.tar.gz",
-        sha256 = "59d82d1d8b21d37d3df9b92712487d8b055a39d77eaec569dff857ffcbc63971",
+        strip_prefix = "rules_python-9d68f24659e8ce8b736590ba1e4418af06ec2552",
+        url = "https://github.com/bazelbuild/rules_python/archive/9d68f24659e8ce8b736590ba1e4418af06ec2552.tar.gz",
+        sha256 = "b5bab4c47e863e0fbb77df4a40c45ca85f98f5a2826939181585644c9f31b97b",
     )
 
 def rules_rust_deps():
