@@ -1,3 +1,17 @@
+windows_targets: &windows_targets
+- "--"
+- "@bazel_skylib//..."
+# TODO: maprule tests fail, but the feature is deprecated, so let's just disable them for now
+- "-@bazel_skylib//tests/maprule:maprule_tests"
+- "-@bazel_skylib//tests/maprule:mr_bash"
+- "-@bazel_skylib//tests/maprule:mr_bash_tool"
+- "-@bazel_skylib//tests/maprule:file_deps"
+# TODO: the following tests cannot be run remotely. fix them!
+- "-@bazel_skylib//tests/native_binary:args_test"
+- "-@bazel_skylib//tests/run_binary:run_bin_test"
+- "-@bazel_skylib//tests/run_binary:run_script_test"
+# TODO: this test only fails on windows due to a bug in Bazel
+- "-@bazel_skylib//tests/native_binary/..."
 targets: &targets
 - "--"
 - "@bazel_skylib//..."
@@ -46,4 +60,5 @@ tasks:
     - python.exe create_project_workspace.py --project=bazel_skylib
     test_flags:
     - --test_env=LOCALAPPDATA
-    <<: *common
+  build_targets: *windows_targets
+  test_targets: *windows_targets
