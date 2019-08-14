@@ -13,6 +13,8 @@ targets: &targets
   - "@rules_python//..."
   # TODO(https://github.com/bazelbuild/rules_python/issues/225): enable test once fixed
   - "-@rules_python//experimental/examples/wheel/..."
+  # TODO(https://github.com/bazelbuild/rules_python/issues/227): enable test once fixed
+  - "-@rules_python//rules_python:whl_test"
 platforms:
   macos:
     setup:
