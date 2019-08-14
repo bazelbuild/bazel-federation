@@ -60,5 +60,5 @@ tasks:
     - python.exe create_project_workspace.py --project=bazel_skylib
     test_flags:
     - --test_env=LOCALAPPDATA
-  build_targets: *windows_targets
-  test_targets: *windows_targets
+    build_targets: *windows_targets
+    test_targets: *windows_targets
