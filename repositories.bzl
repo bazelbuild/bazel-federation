@@ -93,8 +93,8 @@ def bazel_skylib():
     # bazel_skylib_setup()
 
 def bazel_stardoc_deps():
-    rules_nodejs()
-    rules_sass()
+    bazel_skylib()
+    rules_java()
 
 def bazel_stardoc():
     bazel_stardoc_deps()
