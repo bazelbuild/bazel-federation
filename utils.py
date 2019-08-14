@@ -14,9 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from __future__ import print_function
+
 import sys
 
 
 def eprint(msg):
     """Print to stderr and flush (just in case)."""
-    print(msg, flush=True, file=sys.stderr)
+    print(msg, file=sys.stderr)
+    sys.stderr.flush()
