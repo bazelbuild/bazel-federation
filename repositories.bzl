@@ -81,8 +81,10 @@ def bazel_skylib():
     maybe(
         http_archive,
         name = "bazel_skylib",
-        url = "https://github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
-        sha256 = "1dde365491125a3db70731e25658dfdd3bc5dbdfd11b840b3e987ecf043c7ca0",
+        url = "https://github.com/bazelbuild/bazel-skylib/archive/f130d7c388e6beeb77309ba4e421c8f783b91739.zip",
+        sha256 = "8eb5bce85cddd2f4e5232c94e57799de62b1671ce4f79f0f83e10e2d3b2e7986",
+        strip_prefix = "bazel-skylib-f130d7c388e6beeb77309ba4e421c8f783b91739",
+        type = "zip",
     )
     # TODO(aiuto): We should be able to call bazel_skylib_setup() here.
     #     That would register the toolchains. We can not because you can
@@ -91,8 +93,8 @@ def bazel_skylib():
     # bazel_skylib_setup()
 
 def bazel_stardoc_deps():
-    rules_nodejs()
-    rules_sass()
+    bazel_skylib()
+    rules_java()
 
 def bazel_stardoc():
     bazel_stardoc_deps()
@@ -176,8 +178,10 @@ def rules_java():
     maybe(
         http_archive,
         name = "rules_java",
-        url = "https://github.com/bazelbuild/rules_java/releases/download/0.1.0/rules_java-0.1.0.tar.gz",
-        sha256 = "52423cb07384572ab60ef1132b0c7ded3a25c421036176c0273873ec82f5d2b2",
+        url = "https://github.com/bazelbuild/rules_java/archive/d7bf804c8731edd232cb061cb2a9fe003a85d8ee.zip",
+        sha256 = "dc6b247b0bc61120e6c2bfe314c7ed5b19a3a5d5d3a3f8e9acf3ea8b4fb05c7b",
+        strip_prefix = "rules_java-d7bf804c8731edd232cb061cb2a9fe003a85d8ee",
+        type = "zip",
     )
 
 def rules_nodejs_deps():
@@ -216,9 +220,9 @@ def rules_python():
     maybe(
         http_archive,
         name = "rules_python",
-        strip_prefix = "rules_python-4b84ad270387a7c439ebdccfd530e2339601ef27",
-        url = "https://github.com/bazelbuild/rules_python/archive/4b84ad270387a7c439ebdccfd530e2339601ef27.tar.gz",
-        sha256 = "e5470e92a18aa51830db99a4d9c492cc613761d5bdb7131c04bd92b9834380f6",
+        strip_prefix = "rules_python-9d68f24659e8ce8b736590ba1e4418af06ec2552",
+        url = "https://github.com/bazelbuild/rules_python/archive/9d68f24659e8ce8b736590ba1e4418af06ec2552.tar.gz",
+        sha256 = "b5bab4c47e863e0fbb77df4a40c45ca85f98f5a2826939181585644c9f31b97b",
     )
 
 def rules_rust_deps():
