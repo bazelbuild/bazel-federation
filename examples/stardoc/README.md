@@ -1,4 +1,4 @@
-# Sample for using rules_pkg
+# Sample for using Stardoc
 
 ```
 bazel build :*
