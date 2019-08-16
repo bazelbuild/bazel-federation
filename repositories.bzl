@@ -2,7 +2,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("//:java_repositories.bzl", "remote_jdk11_repos", "java_tools_javac11_repos")
-load("//:third_party_repositories.bzl", "abseil_py", "zlib", "org_golang_x_tools", "org_golang_x_sys", "six", "jinja2", "mistune", "markupsafe")
+load("//:third_party_repositories.bzl", "zlib", "org_golang_x_tools", "org_golang_x_sys", "jinja2", "mistune", "markupsafe")
 
 # WARNING: The following definitions are placeholders since none of the projects have been tested at the versions listed in this file.
 # Please do not use them (yet). Future commits to this file will set the proper versions and ensure that all dependencies are correct.
@@ -197,8 +197,7 @@ def rules_nodejs():
     )
 
 def rules_pkg_deps():
-    abseil_py()
-    six()
+    pass
 
 def rules_pkg():
     rules_pkg_deps()
@@ -206,10 +205,10 @@ def rules_pkg():
         http_archive,
         name = "rules_pkg",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/rules_pkg-0.2.1.tar.gz",
-            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.1/rules_pkg-0.2.1.tar.gz",
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/rules_pkg-0.2.2.tar.gz",
+            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.2/rules_pkg-0.2.2.tar.gz",
         ],
-        sha256 = "04c1eab736f508e94c297455915b6371432cbc4106765b5252b444d1656db051",
+        sha256 = "02de387c5ef874379e784ac968bf6efffe5285a168cab5a3169e08cfc634fd22",
     )
 
 def rules_python_deps():
