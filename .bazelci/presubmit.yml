@@ -4,3 +4,4 @@ imports:
 - rules_cc.yml
 - rules_java.yml
 - rules_python.yml
+- tests.yml
