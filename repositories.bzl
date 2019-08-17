@@ -1,7 +1,6 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-load("//:java_repositories.bzl", "remote_jdk11_repos", "java_tools_javac11_repos")
 load("//:third_party_repositories.bzl", "zlib", "org_golang_x_tools", "org_golang_x_sys", "jinja2", "mistune", "markupsafe")
 
 # WARNING: The following definitions are placeholders since none of the projects have been tested at the versions listed in this file.
@@ -169,12 +168,23 @@ def rules_go():
     )
 
 def rules_java_deps():
-    remote_jdk11_repos()
-    java_tools_javac11_repos()
+    # TODO(aiuto): When rules_java stabalizes, reference the deps directly.
+    # rules_java is going to be changing for the next few months. While that
+    # is happening we let rules_java_setup() bring in the deps. This allows
+    # use to quicky update rules_java without havig to update all of the deps
+    # tree which is only used by Java.
     bazel_skylib()
 
 def rules_java():
     rules_java_deps()
+    # TODO(aiuto): After https://github.com/bazelbuild/rules_java/pull/14 is
+    # submitted, produce a release and point to that new one.
+    #maybe(
+    #    http_archive,
+    #    name = "rules_java",
+    #    url = "https://github.com/bazelbuild/rules_java/releases/download/0.1.0/rules_java-0.1.0.tar.gz",
+    #    sha256 = "TBD",
+    #)
     maybe(
         http_archive,
         name = "rules_java",
