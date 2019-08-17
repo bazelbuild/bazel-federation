@@ -3,34 +3,43 @@ tasks:
     name: hello
     working_directory: integration/hello_bazel
     platform: macos
-    # I realy want bazel run. Is that allowed?
-    # Can we run arbitrary commands? It is limiting to only allow bazel
-    # commands.
     build_targets:
+    - ":tarball"
+    run_targets:
     - ":hello_in_c"
-    - ":hello_in_python"
     - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
   hello_ubuntu1604:
     name: hello
     working_directory: integration/hello_bazel
     platform: ubuntu1604
     build_targets:
+    - ":tarball"
+    run_targets:
     - ":hello_in_c"
-    - ":hello_in_python"
     - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
   hello_ubuntu1804:
     name: hello
     working_directory: integration/hello_bazel
     platform: ubuntu1804
     build_targets:
+    - ":tarball"
+    run_targets:
     - ":hello_in_c"
-    - ":hello_in_python"
     - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
   hello_windows:
     name: hello
     working_directory: integration/hello_bazel
     platform: windows
     build_targets:
+    - ":tarball"
+    run_targets:
     - ":hello_in_c"
-    - ":hello_in_python"
     - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
