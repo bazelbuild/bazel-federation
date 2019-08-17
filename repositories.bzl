@@ -232,9 +232,9 @@ def rules_rust():
     maybe(
         http_archive,
         name = "io_bazel_rules_rust",
-        strip_prefix = "rules_rust-f32695dcd02d9a19e42b9eb7f29a24a8ceb2b858",
-        url = "https://github.com/bazelbuild/rules_rust/archive/f32695dcd02d9a19e42b9eb7f29a24a8ceb2b858.tar.gz",
-        sha256 = "ed0c81084bcc2bdcc98cfe56f384b20856840825f5e413e2b71809b61809fc87",
+        strip_prefix = "rules_rust-05bd7d1d1bd34225a6614fc131267181aee2b61e",
+        url = "https://github.com/bazelbuild/rules_rust/archive/05bd7d1d1bd34225a6614fc131267181aee2b61e.tar.gz",
+        sha256 = "55968c5377d9d9f4a5c61780c8a041d478eaac26d984d19fd589afaf12b353dc",
     )
 
 def rules_sass_deps():

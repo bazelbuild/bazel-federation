@@ -1,5 +1,6 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 load("@io_bazel_skydoc//stardoc:stardoc.bzl", "stardoc")
+load("@io_bazel_rules_rust//rust:rust.bzl", "rust_library", "rust_binary", "rust_test")
 load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
 load("@rules_java//java:defs.bzl", "java_library", "java_binary")
 load("@rules_python//python:defs.bzl", "py_binary")
@@ -75,4 +76,21 @@ pkg_tar(
     ],
     strip_prefix = "/",
     package_dir = "federation/sample",
+)
+
+rust_library(
+    name = "rust_lib",
+    srcs = ["lib.rs"],
+)
+
+rust_binary(
+    name = "hello_in_rust",
+    srcs = ["main.rs"],
+    deps = [":rust_lib"],
+)
+
+rust_test(
+    name = "rust_lib_test",
+    srcs = ["rust_lib_test.rs"],
+    deps = [":rust_lib"],
 )
