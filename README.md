@@ -95,9 +95,9 @@ bazel_stardoc_setup()
 
 ## Federation testing on Bazel CI
 
-We test PRs on Bazel CI: [![Build status](https://badge.buildkite.com/9305b2e2ab7f186b3d596baee5e72aabb7274ff9fc28e54251.svg?branch=master)](https://buildkite.com/bazel/bazel-federation)
+[![Build status](https://badge.buildkite.com/9305b2e2ab7f186b3d596baee5e72aabb7274ff9fc28e54251.svg?branch=master)](https://buildkite.com/bazel/bazel-federation)
 
-A CI build runs all tests for each member project and builds several example projects from this repository.
+We test pull requests on Bazel CI: A CI build runs all tests for each member project and builds several example projects from this repository.
 Moreover, the federation gets tested with upcoming incompatible Bazel flags as part of the [downstream pipeline](https://buildkite.com/bazel/bazelisk-plus-incompatible-flags).
 
 The CI configuration for each member project is based on their regular presubmit CI configuration, but we had to disable some targets that could not be tested remotely. Please see the individual CI configuration files in the `.bazelci` for details.
