@@ -100,7 +100,7 @@ bazel_stardoc_setup()
 We test pull requests on Bazel CI: A CI build runs all tests for each member project and builds several example projects from this repository.
 Moreover, the federation gets tested with upcoming incompatible Bazel flags as part of the [downstream pipeline](https://buildkite.com/bazel/bazelisk-plus-incompatible-flags).
 
-The CI configuration for each member project is based on their regular presubmit CI configuration, but we had to disable some targets that could not be tested remotely. Please see the individual CI configuration files in the `.bazelci` for details.
+The CI configuration for each member project is based on their regular presubmit CI configuration, but we had to disable some targets that could not be tested remotely. Please see the individual CI configuration files in the `.bazelci` directory for details.
 
 ## Other reading
 
