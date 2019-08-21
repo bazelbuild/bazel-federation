@@ -37,9 +37,10 @@ tasks:
     working_directory: integration/hello_bazel
     platform: windows
     build_targets:
-    - ":tarball"
+    - ":hello_in_c"
+    - ":HelloInJava"
+    - ":hello_in_python"
     run_targets:
     - ":hello_in_c"
     - ":HelloInJava"
     - ":hello_in_python"
-    - ":hello_in_rust"
