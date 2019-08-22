@@ -1,0 +1,46 @@
+tasks:
+  hello_macos:
+    name: hello
+    working_directory: integration/hello_bazel
+    platform: macos
+    build_targets:
+    - ":tarball"
+    run_targets:
+    - ":hello_in_c"
+    - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
+  hello_ubuntu1604:
+    name: hello
+    working_directory: integration/hello_bazel
+    platform: ubuntu1604
+    build_targets:
+    - ":tarball"
+    run_targets:
+    - ":hello_in_c"
+    - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
+  hello_ubuntu1804:
+    name: hello
+    working_directory: integration/hello_bazel
+    platform: ubuntu1804
+    build_targets:
+    - ":tarball"
+    run_targets:
+    - ":hello_in_c"
+    - ":HelloInJava"
+    - ":hello_in_python"
+    - ":hello_in_rust"
+  hello_windows:
+    name: hello
+    working_directory: integration/hello_bazel
+    platform: windows
+    build_targets:
+    - ":hello_in_c"
+    - ":HelloInJava"
+    - ":hello_in_python"
+    run_targets:
+    - ":hello_in_c"
+    - ":HelloInJava"
+    - ":hello_in_python"
