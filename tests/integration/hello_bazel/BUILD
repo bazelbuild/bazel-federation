@@ -73,6 +73,10 @@ pkg_tar(
     name = "tarball",
     srcs = glob(["**"]) + [
         "//:srcs",
+        ":hello_in_c",
+        ":HelloInJava",
+        ":hello_in_python",
+        ":hello_in_rust",
     ],
     strip_prefix = "/",
     package_dir = "federation/sample",
