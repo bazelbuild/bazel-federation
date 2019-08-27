@@ -5,9 +5,15 @@ local_repository(
     path = "../..",
 )
 
-load("@bazel_federation//:repositories.bzl", "bazel_stardoc")
+load("@bazel_federation//:repositories.bzl",
+     "bazel_skylib",
+     "bazel_stardoc"
+)
+
+bazel_skylib()
+load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
+bazel_skylib_setup()
 
 bazel_stardoc()
-
 load("@bazel_federation//setup:bazel_stardoc.bzl", "bazel_stardoc_setup")
 bazel_stardoc_setup()
