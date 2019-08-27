@@ -17,4 +17,3 @@ go_test(
     srcs = ["lib_test.go"],
     deps = [":lib"],
 )
-

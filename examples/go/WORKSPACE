@@ -1,19 +1,14 @@
 workspace(name = "bazel_federation_go")
 
-local_repository(name = "bazel_federation",
-		 path = "../..",
+local_repository(
+    name = "bazel_federation",
+    path = "../..",
 )
 
-load("@bazel_federation//:repositories.bzl", "io_bazel_rules_go")
+load("@bazel_federation//:repositories.bzl", "rules_go")
 
-io_bazel_rules_go()
+rules_go()
 
-load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains")
+load("@bazel_federation//setup:rules_go.bzl", "rules_go_setup")
 
-go_register_toolchains()
-
-load("@io_bazel_rules_go//go/private:nogo.bzl", "DEFAULT_NOGO", "go_register_nogo")
-
-go_register_nogo(name = "io_bazel_rules_nogo",
-		 nogo = DEFAULT_NOGO
-)
+rules_go_setup()
