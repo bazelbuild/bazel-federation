@@ -1,7 +1,7 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_rules_dependencies", "go_register_toolchains")
-load("@io_bazel_rules_go//go/private:nogo.bzl", "DEFAULT_NOGO", "go_register_nogo")
+load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 def rules_go_setup():
-  go_rules_dependencies()
-  go_register_toolchains()
-  go_register_nogo(name = "io_bazel_rules_nogo", nogo = DEFAULT_NOGO)
+    bazel_skylib_setup()
+    go_rules_dependencies()
+    go_register_toolchains()

@@ -1,11 +1,10 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-load("//:third_party_repositories.bzl", "zlib", "org_golang_x_tools", "org_golang_x_sys", "jinja2", "mistune", "markupsafe")
+load("//:third_party_repositories.bzl", "jinja2", "markupsafe", "mistune", "org_golang_x_sys", "org_golang_x_tools", "zlib")
 
 # WARNING: The following definitions are placeholders since none of the projects have been tested at the versions listed in this file.
 # Please do not use them (yet). Future commits to this file will set the proper versions and ensure that all dependencies are correct.
-
 
 def bazel():
     maybe(
@@ -44,7 +43,6 @@ def bazel_gazelle():
 def bazel_integration_testing_deps():
     pass  # TODO(fweikert): examine dependencies and add them, if necessary
 
-
 def bazel_integration_testing():
     bazel_integration_testing_deps()
     maybe(
@@ -57,7 +55,7 @@ def bazel_integration_testing():
     )
 
 def bazel_toolchains_deps():
-    pass # TODO(fweikert): examine dependencies and add them, if necessary
+    pass  # TODO(fweikert): examine dependencies and add them, if necessary
 
 def bazel_toolchains():
     bazel_toolchains_deps()
@@ -80,16 +78,12 @@ def bazel_skylib():
     maybe(
         http_archive,
         name = "bazel_skylib",
-        url = "https://github.com/bazelbuild/bazel-skylib/archive/f130d7c388e6beeb77309ba4e421c8f783b91739.zip",
-        sha256 = "8eb5bce85cddd2f4e5232c94e57799de62b1671ce4f79f0f83e10e2d3b2e7986",
-        strip_prefix = "bazel-skylib-f130d7c388e6beeb77309ba4e421c8f783b91739",
-        type = "zip",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
+            "https://github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
+        ],
+        sha256 = "1dde365491125a3db70731e25658dfdd3bc5dbdfd11b840b3e987ecf043c7ca0",
     )
-    # TODO(aiuto): We should be able to call bazel_skylib_setup() here.
-    #     That would register the toolchains. We can not because you can
-    #     not do the load() here.
-    # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
-    # bazel_skylib_setup()
 
 def bazel_stardoc_deps():
     bazel_skylib()
@@ -149,11 +143,8 @@ def rules_cc():
         type = "zip",
     )
 
-# TODO(fweikert): check deps
 def rules_go_deps():
-    protobuf()
-    org_golang_x_tools()
-    org_golang_x_sys()
+    bazel_skylib()
 
 def rules_go():
     rules_go_deps()
@@ -177,6 +168,7 @@ def rules_java_deps():
 
 def rules_java():
     rules_java_deps()
+
     # TODO(aiuto): After https://github.com/bazelbuild/rules_java/pull/14 is
     # submitted, produce a release and point to that new one.
     #maybe(
