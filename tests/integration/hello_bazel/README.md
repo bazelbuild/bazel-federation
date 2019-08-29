@@ -6,8 +6,9 @@
 ```
 bazel build :*
 bazel run :hello_in_c
-bazel run :HelloinJava
+bazel run :HelloInJava
 bazel run :hello_in_python
+bazel run :hello_in_rust
 bazel build :tarball
 tar tvf ../bazel-bin/hello_bazel/tarball.tar
 ```
