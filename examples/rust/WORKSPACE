@@ -1,15 +1,9 @@
-workspace(name = "bazel_federation_go")
+workspace(name = "bazel_federation_rust")
 
-local_repository(name = "bazel_federation",
-                 path = "../..",
-)
+local_repository(name = "bazel_federation", path = "../..")
 
-load("@bazel_federation//:repositories.bzl", "io_bazel_rules_rust")
+load("@bazel_federation//:repositories.bzl", "rules_rust")
+rules_rust()
 
-io_bazel_rules_rust()
-
-load("@io_bazel_rules_rust//rust:repositories.bzl", "rust_repositories")
-rust_repositories()
-
-load("@io_bazel_rules_rust//:workspace.bzl", "bazel_version")
-bazel_version(name = "bazel_version")
+load("@bazel_federation//setup:rules_rust.bzl", "rules_rust_setup")
+rules_rust_setup()
