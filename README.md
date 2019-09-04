@@ -102,6 +102,6 @@ Moreover, the federation gets tested with upcoming incompatible Bazel flags as p
 
 The CI configuration for each member project is based on their regular presubmit CI configuration, but we had to disable some targets that could not be tested remotely. Please see the individual CI configuration files in the `.bazelci` directory for details.
 
-## Other reading
+## More information
 
-[Design doc - slighty obsolete](https://docs.google.com/document/d/1dpdZjNCdXZE7SWXKuDQHxHDfXJyXjo5JhsTo-QsudHs/)
+[Documentation](https://bazldocs/index.md)
