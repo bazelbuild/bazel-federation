@@ -9,6 +9,7 @@ load("@bazel_federation//:repositories.bzl",
      "bazel_skylib",
      "bazel_stardoc",
      "rules_cc",
+     "rules_go",
      "rules_java",
      "rules_pkg",
      "rules_python",
@@ -18,6 +19,10 @@ load("@bazel_federation//:repositories.bzl",
 rules_cc()
 load("@bazel_federation//setup:rules_cc.bzl", "rules_cc_setup")
 rules_cc_setup()
+
+rules_go()
+load("@bazel_federation//setup:rules_go.bzl", "rules_go_setup")
+rules_go_setup()
 
 rules_java()
 load("@bazel_federation//setup:rules_java.bzl", "rules_java_setup")

@@ -5,12 +5,6 @@ local_repository(
     path = "../..",
 )
 
-# DO NOT SUBMIT WITH THIS
-local_repository(
-    name = "io_bazel_rules_go",
-    path = "../../../rules_go",
-)
-
 load("@bazel_federation//:repositories.bzl", "rules_go")
 
 rules_go()

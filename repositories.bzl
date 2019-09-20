@@ -168,7 +168,6 @@ def rules_java_deps():
 
 def rules_java():
     rules_java_deps()
-
     # TODO(aiuto): After https://github.com/bazelbuild/rules_java/pull/14 is
     # submitted, produce a release and point to that new one.
     #maybe(
