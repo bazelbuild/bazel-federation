@@ -104,4 +104,4 @@ The CI configuration for each member project is based on their regular presubmit
 
 ## More information
 
-[Documentation](https://bazldocs/index.md)
+[Documentation](https://bazelbuild.github.io/bazel-federation/)
