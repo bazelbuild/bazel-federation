@@ -162,3 +162,7 @@ At a minimum, you must add yourself to the
 -   If you are providing a language toolchain, then add that directly to the
     ["hello bazel"](https://github.com/bazelbuild/bazel-federation/tree/master/tests/integration/hello_bazel)
     example.
+
+The next step is to make sure there is test coverage on CI.
+
+TODO(fweikert): Add instructions for editing the .yaml files.
