@@ -78,12 +78,16 @@ def bazel_skylib():
     maybe(
         http_archive,
         name = "bazel_skylib",
-        urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
-            "https://github.com/bazelbuild/bazel-skylib/releases/download/0.9.0/bazel_skylib-0.9.0.tar.gz",
-        ],
-        sha256 = "1dde365491125a3db70731e25658dfdd3bc5dbdfd11b840b3e987ecf043c7ca0",
+        url = "https://github.com/bazelbuild/bazel-skylib/archive/f130d7c388e6beeb77309ba4e421c8f783b91739.zip",
+        sha256 = "8eb5bce85cddd2f4e5232c94e57799de62b1671ce4f79f0f83e10e2d3b2e7986",
+        strip_prefix = "bazel-skylib-f130d7c388e6beeb77309ba4e421c8f783b91739",
+        type = "zip",
     )
+    # TODO(aiuto): We should be able to call bazel_skylib_setup() here.
+    #     That would register the toolchains. We can not because you can
+    #     not do the load() here.
+    # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
+    # bazel_skylib_setup()
 
 def bazel_stardoc_deps():
     bazel_skylib()
