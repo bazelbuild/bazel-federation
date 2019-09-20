@@ -14,13 +14,13 @@ targets: &targets
 platforms:
   macos:
     setup:
-    - python3.7 create_project_workspace.py --project=rules_python
+    - python3.7 create_project_workspace.py --project=rules_python --has_internal_deps
     <<: *targets
   ubuntu1604:
     setup:
-    - python3.6 create_project_workspace.py --project=rules_python
+    - python3.6 create_project_workspace.py --project=rules_python --has_internal_deps
     <<: *targets
   ubuntu1804:
     setup:
-    - python3.6 create_project_workspace.py --project=rules_python
+    - python3.6 create_project_workspace.py --project=rules_python --has_internal_deps
     <<: *targets

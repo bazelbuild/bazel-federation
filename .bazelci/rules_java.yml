@@ -6,22 +6,22 @@ tasks:
   macos:
     build_targets: *build_targets
     setup:
-    - python3.7 create_project_workspace.py --project=rules_java
+    - python3.7 create_project_workspace.py --project=rules_java --has_internal_deps
   ubuntu1604:
     build_targets: *build_targets
     setup:
-    - python3.6 create_project_workspace.py --project=rules_java
+    - python3.6 create_project_workspace.py --project=rules_java --has_internal_deps
   ubuntu1804:
     build_targets: *build_targets
     setup:
-    - python3.6 create_project_workspace.py --project=rules_java
+    - python3.6 create_project_workspace.py --project=rules_java --has_internal_deps
   ubuntu1804_nojava:
     build_flags:
     - --javabase=@openjdk11_linux_archive//:runtime
     build_targets: *build_targets
     setup:
-    - python3.6 create_project_workspace.py --project=rules_java
+    - python3.6 create_project_workspace.py --project=rules_java --has_internal_deps
   windows:
     build_targets: *build_targets
     setup:
-    - python.exe create_project_workspace.py --project=rules_java
+    - python.exe create_project_workspace.py --project=rules_java --has_internal_deps

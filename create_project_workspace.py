@@ -39,6 +39,9 @@ load("@bazel_federation//:repositories.bzl", "{project}")
 load("@bazel_federation//setup:{project}.bzl", "{project}_setup")
 
 {project}_setup()
+""")
+
+INTERNAL_DEPS_TEMPLATE = """
 
 load("@{repo}//:internal_deps.bzl", "{project}_internal_deps")
 
@@ -47,11 +50,14 @@ load("@{repo}//:internal_deps.bzl", "{project}_internal_deps")
 load("@{repo}//:internal_setup.bzl", "{project}_internal_setup")
 
 {project}_internal_setup()
-""")
+"""
 
 
-def create_new_workspace(project_name, repo_name):
-    return WORKSPACE_TEMPLATE.format(project=project_name, repo=repo_name)
+def create_new_workspace(project_name, repo_name, has_internal_deps=False):
+    ret = WORKSPACE_TEMPLATE.format(project=project_name, repo=repo_name)
+    if has_internal_deps:
+      ret += INTERNAL_DEPS_TEMPLATE.format(project=project_name, repo=repo_name)
+    return ret
 
 
 def set_up_project(project_name, workspace_content):
@@ -68,11 +74,15 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Bazel Federation WORKSPACE Generation Script")
     parser.add_argument("--project", type=str, required=True)
     parser.add_argument("--repo", type=str)
+    parser.add_argument("--has_internal_deps", type=bool)
 
     args = parser.parse_args(argv)
 
     try:
-        content = create_new_workspace(args.project, args.repo or args.project)
+        content = create_new_workspace(
+            args.project,
+            args.repo or args.project,
+            has_internal_deps=args.has_internal_deps)
         set_up_project(args.project, content)
     except Exception as ex:
         utils.eprint(ex)

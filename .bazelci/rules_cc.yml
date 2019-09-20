@@ -3,7 +3,7 @@ platforms:
     build_targets:
     - '@rules_cc//...'
     setup:
-    - python3.7 create_project_workspace.py --project=rules_cc
+    - python3.7 create_project_workspace.py --project=rules_cc --has_internal_deps
     test_flags:
     - --test_timeout=300
     test_targets:
@@ -12,7 +12,7 @@ platforms:
     build_targets:
     - '@rules_cc//...'
     setup:
-    - python3.6 create_project_workspace.py --project=rules_cc
+    - python3.6 create_project_workspace.py --project=rules_cc --has_internal_deps
     test_flags:
     - --test_timeout=300
     test_targets:
@@ -21,7 +21,7 @@ platforms:
     build_targets:
     - '@rules_cc//...'
     setup:
-    - python3.6 create_project_workspace.py --project=rules_cc
+    - python3.6 create_project_workspace.py --project=rules_cc --has_internal_deps
     test_flags:
     - --test_timeout=300
     test_targets:
@@ -32,7 +32,7 @@ platforms:
     build_targets:
     - '@rules_cc//...'
     setup:
-    - python3.6 create_project_workspace.py --project=rules_cc
+    - python3.6 create_project_workspace.py --project=rules_cc --has_internal_deps
     test_flags:
     - --test_timeout=300
     - --javabase=@openjdk11_linux_archive//:runtime
@@ -42,7 +42,7 @@ platforms:
     build_targets:
     - '@rules_cc//...'
     setup:
-    - python.exe create_project_workspace.py --project=rules_cc
+    - python.exe create_project_workspace.py --project=rules_cc --has_internal_deps
     test_flags:
     - --test_timeout=300
     test_targets:
