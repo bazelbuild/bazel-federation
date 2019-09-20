@@ -152,10 +152,10 @@ def rules_go():
         http_archive,
         name = "io_bazel_rules_go",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/0.19.3/rules_go-0.19.3.tar.gz",
-            "https://github.com/bazelbuild/rules_go/releases/download/0.19.3/rules_go-0.19.3.tar.gz",
+            "https://github.com/bazelbuild/rules_go/archive/0c1081b3618a2c6ca1220f7f7ffb644a2955ddf8.zip"
         ],
-        sha256 = "313f2c7a23fecc33023563f082f381a32b9b7254f727a7dd2d6380ccc6dfe09b",
+        sha256 = "3cb1bf7f2a3bbd9bed618234a792ce522093138a6298d6d4688b7b8018a49f8b",
+        strip_prefix = "rules_go-0c1081b3618a2c6ca1220f7f7ffb644a2955ddf8",
     )
 
 def rules_java_deps():
