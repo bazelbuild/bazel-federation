@@ -3,8 +3,6 @@ targets: &targets
   - "--"
   - "@rules_python//examples/..."
   - "@rules_python//experimental/..."
-  # TODO(https://github.com/bazelbuild/rules_python/issues/225): enable test once fixed
-  - "-@rules_python//experimental/examples/wheel/..."
   - "@rules_python//python/..."
   - "@rules_python//packaging/..."
   - "@rules_python//tools/..."
