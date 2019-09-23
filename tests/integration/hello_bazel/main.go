@@ -15,11 +15,11 @@
 package main
 
 import (
-	"fmt"
+        "fmt"
 
-	"github.com/laurentlb/bazel-federation/lib"
+        "github.com/bazelbuild/bazel-federation/examples/go/lib"
 )
 
 func main() {
-	fmt.Println(lib.Text())
+        fmt.Println(lib.Text())
 }

@@ -7,6 +7,7 @@
 bazel build :*
 bazel run :hello_in_c
 bazel run :HelloInJava
+bazel run :hello_in_go
 bazel run :hello_in_python
 bazel run :hello_in_rust
 bazel build :tarball
