@@ -17,7 +17,7 @@ package lib
 import (
 	"testing"
 
-	"github.com/laurentlb/bazel-federation/lib"
+	"github.com/bazelbuild/bazel-federation/examples/go/lib"
 )
 
 func TestText(t *testing.T) {
