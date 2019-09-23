@@ -1,11 +1,10 @@
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
-load("//:third_party_repositories.bzl", "zlib", "org_golang_x_tools", "org_golang_x_sys", "jinja2", "mistune", "markupsafe")
+load("//:third_party_repositories.bzl", "jinja2", "markupsafe", "mistune", "org_golang_x_sys", "org_golang_x_tools", "zlib")
 
 # WARNING: The following definitions are placeholders since none of the projects have been tested at the versions listed in this file.
 # Please do not use them (yet). Future commits to this file will set the proper versions and ensure that all dependencies are correct.
-
 
 def bazel():
     maybe(
@@ -44,7 +43,6 @@ def bazel_gazelle():
 def bazel_integration_testing_deps():
     pass  # TODO(fweikert): examine dependencies and add them, if necessary
 
-
 def bazel_integration_testing():
     bazel_integration_testing_deps()
     maybe(
@@ -57,7 +55,7 @@ def bazel_integration_testing():
     )
 
 def bazel_toolchains_deps():
-    pass # TODO(fweikert): examine dependencies and add them, if necessary
+    pass  # TODO(fweikert): examine dependencies and add them, if necessary
 
 def bazel_toolchains():
     bazel_toolchains_deps()
@@ -149,11 +147,8 @@ def rules_cc():
         type = "zip",
     )
 
-# TODO(fweikert): check deps
 def rules_go_deps():
-    protobuf()
-    org_golang_x_tools()
-    org_golang_x_sys()
+    bazel_skylib()
 
 def rules_go():
     rules_go_deps()
@@ -161,10 +156,10 @@ def rules_go():
         http_archive,
         name = "io_bazel_rules_go",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/0.18.6/rules_go-0.18.6.tar.gz",
-            "https://github.com/bazelbuild/rules_go/releases/download/0.18.6/rules_go-0.18.6.tar.gz",
+            "https://github.com/bazelbuild/rules_go/archive/0c1081b3618a2c6ca1220f7f7ffb644a2955ddf8.zip"
         ],
-        sha256 = "f04d2373bcaf8aa09bccb08a98a57e721306c8f6043a2a0ee610fd6853dcde3d",
+        sha256 = "3cb1bf7f2a3bbd9bed618234a792ce522093138a6298d6d4688b7b8018a49f8b",
+        strip_prefix = "rules_go-0c1081b3618a2c6ca1220f7f7ffb644a2955ddf8",
     )
 
 def rules_java_deps():
