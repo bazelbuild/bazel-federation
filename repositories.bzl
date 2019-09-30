@@ -210,10 +210,10 @@ def rules_pkg():
         http_archive,
         name = "rules_pkg",
         urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/rules_pkg-0.2.2.tar.gz",
-            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.2/rules_pkg-0.2.2.tar.gz",
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.2.4/rules_pkg-0.2.4.tar.gz",
+            "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.4/rules_pkg-0.2.4.tar.gz",
         ],
-        sha256 = "02de387c5ef874379e784ac968bf6efffe5285a168cab5a3169e08cfc634fd22",
+        sha256 = "4ba8f4ab0ff85f2484287ab06c0d871dcb31cc54d439457d28fd4ae14b18450a",
     )
 
 def rules_python_deps():
