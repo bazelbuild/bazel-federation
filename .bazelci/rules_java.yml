@@ -1,7 +1,6 @@
 build_targets: &build_targets
 - '--'
 - '@rules_java//...'
-- '-@rules_java//distro/...'  # TODO(aiuto): fix and enable distro targets
 tasks:
   macos:
     build_targets: *build_targets
