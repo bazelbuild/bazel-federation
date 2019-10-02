@@ -172,21 +172,14 @@ def rules_java_deps():
 
 def rules_java():
     rules_java_deps()
-    # TODO(aiuto): After https://github.com/bazelbuild/rules_java/pull/14 is
-    # submitted, produce a release and point to that new one.
-    #maybe(
-    #    http_archive,
-    #    name = "rules_java",
-    #    url = "https://github.com/bazelbuild/rules_java/releases/download/0.1.0/rules_java-0.1.0.tar.gz",
-    #    sha256 = "TBD",
-    #)
     maybe(
         http_archive,
         name = "rules_java",
-        url = "https://github.com/bazelbuild/rules_java/archive/d7bf804c8731edd232cb061cb2a9fe003a85d8ee.zip",
-        sha256 = "dc6b247b0bc61120e6c2bfe314c7ed5b19a3a5d5d3a3f8e9acf3ea8b4fb05c7b",
-        strip_prefix = "rules_java-d7bf804c8731edd232cb061cb2a9fe003a85d8ee",
-        type = "zip",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_java/archive/rules_java-0.1.1.tar.gz",
+            "https://github.com/bazelbuild/rules_java/releases/download/0.1.1/rules_java-0.1.1.tar.gz",
+        ],
+        sha256 = "86d02542f4ea46e581c94acb9458702ecf995ca07168b0dac8fe16751f9a1d43",
     )
 
 def rules_nodejs_deps():
