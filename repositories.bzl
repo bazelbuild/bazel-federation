@@ -179,7 +179,7 @@ def rules_java():
             "https://mirror.bazel.build/github.com/bazelbuild/rules_java/archive/rules_java-0.1.1.tar.gz",
             "https://github.com/bazelbuild/rules_java/releases/download/0.1.1/rules_java-0.1.1.tar.gz",
         ],
-        sha256 = "86d02542f4ea46e581c94acb9458702ecf995ca07168b0dac8fe16751f9a1d43",
+        sha256 = "220b87d8cfabd22d1c6d8e3cdb4249abd4c93dcc152e0667db061fb1b957ee68",
     )
 
 def rules_nodejs_deps():
