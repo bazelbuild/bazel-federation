@@ -14,6 +14,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
+    - python3.7 patch_repositories.py
     - python3.7 create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=PATH
@@ -22,6 +23,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
+    - python3.6 patch_repositories.py
     - python3.6 create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=PATH
@@ -30,6 +32,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
+    - python3.6 patch_repositories.py
     - python3.6 create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=PATH
@@ -38,6 +41,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
+    - python.exe patch_repositories.py
     - python.exe create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=LOCALAPPDATA

@@ -106,9 +106,11 @@ def load_remote_config(http_url):
 def transform_config(project_name, repository_name, config):
     tasks = config.get("tasks") or config.get("platforms")
     for name, task_config in tasks.items():
+        python = get_python_version_for_task(name, task_config)
         task_config["setup"] = [
+            "%s patch_repositories.py" % python,
             "%s create_project_workspace.py --project=%s --repo=%s"
-            % (get_python_version_for_task(name, task_config), project_name, repository_name)
+            % (python, project_name, repository_name)
         ]
         for field in ("run_targets", "build_targets", "test_targets"):
             targets = task_config.get(field)
