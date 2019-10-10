@@ -13,4 +13,4 @@
 # limitations under the License.
 """The version of bazel_federation."""
 
-version = "0.0.1"
+version = "0.0.2"
