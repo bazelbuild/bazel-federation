@@ -1,39 +1,20 @@
+---
+# TOOD(https://github.com/bazelbuild/bazel-federation/issues/78): remove internal flag once it defaults to False
 windows_targets: &windows_targets
 - "--"
 - "@bazel_skylib//..."
-# TODO: maprule tests fail, but the feature is deprecated, so let's just disable them for now
-- "-@bazel_skylib//tests/maprule:maprule_tests"
-- "-@bazel_skylib//tests/maprule:mr_bash"
-- "-@bazel_skylib//tests/maprule:mr_bash_tool"
-- "-@bazel_skylib//tests/maprule:file_deps"
-# TODO: the following tests cannot be run remotely. fix them!
-- "-@bazel_skylib//tests/native_binary:args_test"
-- "-@bazel_skylib//tests/run_binary:run_bin_test"
-- "-@bazel_skylib//tests/run_binary:run_script_test"
-# TODO: this test only fails on windows due to a bug in Bazel
-- "-@bazel_skylib//tests/native_binary/..."
 targets: &targets
 - "--"
 - "@bazel_skylib//..."
-# TODO: maprule tests fail, but the feature is deprecated, so let's just disable them for now
-- "-@bazel_skylib//tests/maprule:maprule_tests"
-- "-@bazel_skylib//tests/maprule:mr_bash"
-- "-@bazel_skylib//tests/maprule:mr_bash_tool"
-- "-@bazel_skylib//tests/maprule:file_deps"
-# TODO: the following tests cannot be run remotely. fix them!
-- "-@bazel_skylib//tests/native_binary:args_test"
-- "-@bazel_skylib//tests/run_binary:run_bin_test"
-- "-@bazel_skylib//tests/run_binary:run_script_test"
 common: &common
   build_targets: *targets
-  test_targets: *targets
 buildifier: latest
 tasks:
   macos:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
-    - python3.7 create_project_workspace.py --project=bazel_skylib
+    - python3.7 create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=PATH
     <<: *common
@@ -41,7 +22,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
-    - python3.6 create_project_workspace.py --project=bazel_skylib
+    - python3.6 create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=PATH
     <<: *common
@@ -49,7 +30,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
-    - python3.6 create_project_workspace.py --project=bazel_skylib
+    - python3.6 create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=PATH
     <<: *common
@@ -57,8 +38,7 @@ tasks:
     build_flags:
     - --incompatible_remap_main_repo
     setup:
-    - python.exe create_project_workspace.py --project=bazel_skylib
+    - python.exe create_project_workspace.py --project=bazel_skylib --internal=0
     test_flags:
     - --test_env=LOCALAPPDATA
     build_targets: *windows_targets
-    test_targets: *windows_targets
