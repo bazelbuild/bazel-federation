@@ -24,8 +24,7 @@ import sys
 import utils
 
 
-WORKSPACE_TEMPLATE = (
-    """workspace(name = "{repo}_federation_example")
+WORKSPACE_TEMPLATE = """workspace(name = "{repo}_federation_example")
 
 local_repository(
     name = "bazel_federation",
@@ -39,19 +38,27 @@ load("@bazel_federation//:repositories.bzl", "{project}")
 load("@bazel_federation//setup:{project}.bzl", "{project}_setup")
 
 {project}_setup()
+"""
 
-load("@{repo}//:internal_deps.bzl", "{project}_internal_deps")
+
+INTERNAL_SETUP_TEMPLATE = """load("@{repo}//:internal_deps.bzl", "{project}_internal_deps")
 
 {project}_internal_deps()
 
 load("@{repo}//:internal_setup.bzl", "{project}_internal_setup")
 
 {project}_internal_setup()
-""")
+"""
 
 
-def create_new_workspace(project_name, repo_name):
-    return WORKSPACE_TEMPLATE.format(project=project_name, repo=repo_name)
+def create_new_workspace(project_name, repo_name, add_internal_setup):
+    workspace = WORKSPACE_TEMPLATE.format(project=project_name, repo=repo_name)
+    if add_internal_setup:
+        workspace = "{}\n{}".format(
+            workspace, INTERNAL_SETUP_TEMPLATE.format(project=project_name, repo=repo_name)
+        )
+
+    return workspace
 
 
 def set_up_project(project_name, workspace_content):
@@ -68,11 +75,14 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description="Bazel Federation WORKSPACE Generation Script")
     parser.add_argument("--project", type=str, required=True)
     parser.add_argument("--repo", type=str)
+    parser.add_argument("--internal", type=int, default=1)
+    # TODO(https://github.com/bazelbuild/bazel-federation/issues/78): Turn it into a boolean
+    # flag that defaults to False once all presubmit configurations have been migrated.
 
     args = parser.parse_args(argv)
 
     try:
-        content = create_new_workspace(args.project, args.repo or args.project)
+        content = create_new_workspace(args.project, args.repo or args.project, bool(args.internal))
         set_up_project(args.project, content)
     except Exception as ex:
         utils.eprint(ex)
