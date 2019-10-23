@@ -3,6 +3,8 @@ tasks:
     name: hello
     working_directory: integration/hello_bazel
     platform: macos
+    setup:
+    - python3.7 patch_repositories.py
     build_targets:
     - ":tarball"
     run_targets:
@@ -14,6 +16,8 @@ tasks:
     name: hello
     working_directory: integration/hello_bazel
     platform: ubuntu1604
+    setup:
+    - python3.6 patch_repositories.py
     build_targets:
     - ":tarball"
     run_targets:
@@ -25,6 +29,8 @@ tasks:
     name: hello
     working_directory: integration/hello_bazel
     platform: ubuntu1804
+    setup:
+    - python3.6 patch_repositories.py
     build_targets:
     - ":tarball"
     run_targets:
@@ -36,6 +42,8 @@ tasks:
     name: hello
     working_directory: integration/hello_bazel
     platform: windows
+    setup:
+    - python.exe patch_repositories.py
     build_targets:
     - ":hello_in_c"
     - ":HelloInJava"
