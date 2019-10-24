@@ -217,11 +217,10 @@ def rules_python():
     maybe(
         http_archive,
         name = "rules_python",
-        urls = [
-            "https://mirror.bazel.build/github.com/bazelbuild/rules_python/releases/download/0.0.1/rules_python-0.0.1.tar.gz",
-            "https://github.com/bazelbuild/rules_python/releases/download/0.0.1/rules_python-0.0.1.tar.gz",
-        ],
-        sha256 = "aa96a691d3a8177f3215b14b0edc9641787abaaa30363a080165d06ab65e1161",
+        strip_prefix = "rules_python-0.0.1",
+        type = "zip",
+        url = "https://github.com/bazelbuild/rules_python/archive/0.0.1.zip",
+        sha256 = "f73c0cf51c32c7aaeaf02669ed03b32d12f2d92e1b05699eb938a75f35a210f4",
     )
 
 def rules_rust_deps():
