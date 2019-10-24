@@ -41,11 +41,11 @@ load("@bazel_federation//setup:{project}.bzl", "{project}_setup")
 """
 
 
-INTERNAL_SETUP_TEMPLATE = """load("@{repo}//:internal_deps.bzl", "{project}_internal_deps")
+INTERNAL_SETUP_TEMPLATE = """load("@bazel_federation//internal/deps:{repo}.bzl", "{project}_internal_deps")
 
 {project}_internal_deps()
 
-load("@{repo}//:internal_setup.bzl", "{project}_internal_setup")
+load("@bazel_federation//internal/setup:{repo}.bzl", "{project}_internal_setup")
 
 {project}_internal_setup()
 """
