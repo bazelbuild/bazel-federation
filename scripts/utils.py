@@ -23,6 +23,38 @@ PRINT_COMMANDS = True
 _SENTINEL = "meta_data_sentinel_value"
 
 
+def calculate_paths(root_file):
+    script_path = os.path.abspath(__file__)
+    current_dir = os.path.dirname(script_path)
+    script_dirs = []
+
+    while True:
+        file_path = os.path.join(current_dir, root_file)
+        if os.path.exists(file_path):
+            script_base_path = os.path.join(*script_dirs) if script_dirs else ""
+            return current_dir, script_base_path
+
+        parent_dir, part = os.path.split(current_dir)
+        if not parent_dir or parent_dir == current_dir:
+            raise Exception(
+                "Unable to find a parent directory of {} that contains {}".format(
+                    script_path, root_file
+                )
+            )
+
+        script_dirs.insert(0, part)
+        current_dir = parent_dir
+
+
+REPO_ROOT, _SCRIPT_BASE = calculate_paths("repositories.bzl")
+
+
+def get_script_path(filename):
+    """Returns the path of the given script, relative to the repo root."""
+    # os.path.join ignores empty _SCRIPT_BASE values
+    return os.path.join(_SCRIPT_BASE, filename)
+
+
 def eprint(msg):
     """Print to stderr and flush (just in case)."""
     print(msg, flush=True, file=sys.stderr)
@@ -45,9 +77,7 @@ def execute_command(*args):
 
 
 def get_meta_data(key, default=_SENTINEL):
-    process = execute_command(
-        "buildkite-agent", "meta-data", "get", key, "--default", default
-    )
+    process = execute_command("buildkite-agent", "meta-data", "get", key, "--default", default)
     if process.returncode:
         raise ValueError("Failed to read meta data '{}': {}".format(key, process.stderr))
 
@@ -59,9 +89,7 @@ def get_meta_data(key, default=_SENTINEL):
 
 
 def set_meta_data(key, value):
-    process = execute_command(
-        "buildkite-agent", "meta-data", "set", key, value
-    )
+    process = execute_command("buildkite-agent", "meta-data", "set", key, value)
     if process.returncode:
         raise ValueError("Failed to write meta data '{}': {}".format(key, process.stderr))
 
