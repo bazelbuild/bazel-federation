@@ -38,7 +38,7 @@ DEFAULT_PYTHON_VERSION = "python3.6"
 
 PROJECT_REGEX = re.compile(r"bazelbuild/([^/]+)/")
 
-MASTER_CONFIG_FILE = ".bazelci/presubmit.yml"
+MASTER_CONFIG_FILE = os.path.join(utils.REPO_ROOT, ".bazelci/presubmit.yml")
 
 
 CONFIG_TEMPLATE = """
@@ -107,10 +107,13 @@ def transform_config(project_name, repository_name, config):
     tasks = config.get("tasks") or config.get("platforms")
     for name, task_config in tasks.items():
         python = get_python_version_for_task(name, task_config)
+        patch_script_path = utils.get_script_path("patch_repositories.py")
+        ws_script_path = utils.get_script_path("create_project_workspace.py")
         task_config["setup"] = [
-            "%s patch_repositories.py" % python,
-            "%s create_project_workspace.py --project=%s --repo=%s"
-            % (python, project_name, repository_name)
+            "{} {}".format(python, patch_script_path),
+            "{} {} --project={} --repo={}".format(
+                python, ws_script_path, project_name, repository_name
+            ),
         ]
         for field in ("run_targets", "build_targets", "test_targets"):
             targets = task_config.get(field)

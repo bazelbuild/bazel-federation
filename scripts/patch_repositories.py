@@ -170,8 +170,10 @@ def main(argv=None):
     project_name = utils.get_meta_data(build_project_distro.REPO_META_DATA_KEY)
     archive_path = download_distro(project_name)
     project_root = extract_distro(project_name, archive_path)
-    rewrite_repositories_file(args.repositories_file, project_name, project_root)
-    upload_repositories_file(args.repositories_file)
+
+    path = os.path.join(utils.REPO_ROOT, args.repositories_file)
+    rewrite_repositories_file(path, project_name, project_root)
+    upload_repositories_file(path)
 
     return 0
 

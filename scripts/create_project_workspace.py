@@ -62,8 +62,9 @@ def create_new_workspace(project_name, repo_name, add_internal_setup):
 
 
 def set_up_project(project_name, workspace_content):
-    os.mkdir(project_name)
-    path = os.path.join(os.getcwd(), project_name, "WORKSPACE")
+    project_dir = os.path.join(utils.REPO_ROOT, project_name)
+    os.mkdir(project_dir)
+    path = os.path.join(project_dir, "WORKSPACE")
     with open(path, "w") as f:
         f.write(workspace_content)
 
