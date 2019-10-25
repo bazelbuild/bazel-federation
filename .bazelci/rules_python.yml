@@ -3,21 +3,29 @@
 targets: &targets
   build_targets:
   - "--"
+  - "@rules_python//examples/..."
+  - "@rules_python//experimental/..."
+  - "@rules_python//packaging/..."
   - "@rules_python//python/..."
   - "@rules_python//tools/..."
+  test_targets:
+  - "--"
+  - "@rules_python//..."
+  # TODO(https://github.com/bazelbuild/rules_python/issues/225): enable test once fixed
+  - "-@rules_python//experimental/examples/wheel/..."
 platforms:
   macos:
     setup:
     - python3.7 patch_repositories.py
-    - python3.7 create_project_workspace.py --project=rules_python --internal=0
+    - python3.7 create_project_workspace.py --project=rules_python
     <<: *targets
   ubuntu1604:
     setup:
     - python3.6 patch_repositories.py
-    - python3.6 create_project_workspace.py --project=rules_python --internal=0
+    - python3.6 create_project_workspace.py --project=rules_python
     <<: *targets
   ubuntu1804:
     setup:
     - python3.6 patch_repositories.py
-    - python3.6 create_project_workspace.py --project=rules_python --internal=0
+    - python3.6 create_project_workspace.py --project=rules_python
     <<: *targets
