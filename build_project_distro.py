@@ -67,11 +67,7 @@ def build_distro(repo_dir, target):
 
 def save_distro(distro_path):
     utils.print_group("Uploading distro from {}".format(distro_path))
-    # Don't upload from distro_path directly since Buildkite will keep the long path
-    # as part of the artifact name.
-    dirname, basename = os.path.split(distro_path)
-    os.chdir(dirname)
-    utils.upload_file(basename)
+    basename = utils.upload_file(distro_path)
     utils.set_meta_data(ARCHIVE_META_DATA_KEY, basename)
 
 
