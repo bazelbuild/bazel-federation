@@ -4,7 +4,7 @@ tasks:
     working_directory: rules_pkg
     platform: macos
     setup:
-    - python3.7 patch_repositories.py
+    - python3.7 scripts/patch_repositories.py
     build_targets:
     - "..."
   rules_pkg_ubuntu1604:
@@ -12,7 +12,7 @@ tasks:
     working_directory: rules_pkg
     platform: ubuntu1604
     setup:
-    - python3.6 patch_repositories.py
+    - python3.6 scripts/patch_repositories.py
     build_targets:
     - "..."
   rules_pkg_ubuntu1804:
@@ -20,7 +20,7 @@ tasks:
     working_directory: rules_pkg
     platform: ubuntu1804
     setup:
-    - python3.6 patch_repositories.py
+    - python3.6 scripts/patch_repositories.py
     build_targets:
     - "..."
   rules_pkg_windows:
@@ -28,7 +28,7 @@ tasks:
     working_directory: rules_pkg
     platform: windows
     setup:
-    - python.exe patch_repositories.py
+    - python.exe scripts/patch_repositories.py
     build_targets:
     - "..."
 
@@ -37,7 +37,7 @@ tasks:
     working_directory: stardoc
     platform: macos
     setup:
-    - python3.7 patch_repositories.py
+    - python3.7 scripts/patch_repositories.py
     build_targets:
     - "..."
   stardoc_ubuntu1604:
@@ -45,7 +45,7 @@ tasks:
     working_directory: stardoc
     platform: ubuntu1604
     setup:
-    - python3.6 patch_repositories.py
+    - python3.6 scripts/patch_repositories.py
     build_targets:
     - "..."
   stardoc_ubuntu1804:
@@ -53,7 +53,7 @@ tasks:
     working_directory: stardoc
     platform: ubuntu1804
     setup:
-    - python3.6 patch_repositories.py
+    - python3.6 scripts/patch_repositories.py
     build_targets:
     - "..."
   stardoc_windows:
@@ -61,6 +61,6 @@ tasks:
     working_directory: stardoc
     platform: windows
     setup:
-    - python.exe patch_repositories.py
+    - python.exe scripts/patch_repositories.py
     build_targets:
     - "..."
