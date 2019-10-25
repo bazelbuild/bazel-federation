@@ -212,12 +212,11 @@ def py_mock():
 def six():
     maybe(
         http_archive,
-        name = "six_archive",
+        name = "six",
         build_file = "@bazel_federation//:third_party/six.BUILD",
         sha256 = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a",
         urls = ["https://pypi.python.org/packages/source/s/six/six-1.10.0.tar.gz#md5=34eed507548117b2ab523ab14b2f8b55"],
     )
-    native.bind(name = "six", actual = "@six_archive//:six")
 
 def subpar():
     maybe(

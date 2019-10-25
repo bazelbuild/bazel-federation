@@ -1,5 +1,6 @@
 # Copied from https://github.com/protocolbuffers/protobuf/blob/master/third_party/zlib.BUILD
-package(default_visibility = ["//visibility:public"])
+
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 licenses(["notice"])  # BSD/MIT-like license (for zlib)
 
@@ -27,7 +28,6 @@ genrule(
     srcs = _ZLIB_HEADERS,
     outs = _ZLIB_PREFIXED_HEADERS,
     cmd = "cp $(SRCS) $(@D)/zlib/include/",
-    visibility = ["//visibility:private"],
 )
 
 cc_library(
@@ -53,9 +53,13 @@ cc_library(
         # choice of <> or "" delimiter when including itself.
     ] + _ZLIB_HEADERS,
     hdrs = _ZLIB_PREFIXED_HEADERS,
-    copts = [
-        "-Wno-unused-variable",
-        "-Wno-implicit-function-declaration",
-    ],
+    copts = select({
+        "@bazel_tools//src/conditions:windows": [],
+        "//conditions:default": [
+            "-Wno-unused-variable",
+            "-Wno-implicit-function-declaration",
+        ],
+    }),
     includes = ["zlib/include/"],
+    visibility = ["//visibility:public"],
 )
