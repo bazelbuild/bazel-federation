@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import subprocess
 import sys
 
@@ -68,6 +69,17 @@ def set_meta_data(key, value):
 
 
 def upload_file(path):
-    process = execute_command("buildkite-agent", "artifact", "upload", path)
-    if process.returncode:
-        raise Exception("Failed to upload {}: {}".format(path, process.stderr))
+    # Don't upload from `path` directly since Buildkite will keep the long path
+    # as part of the artifact name.
+    cwd = os.getcwd()
+    dirname, basename = os.path.split(os.path.abspath(path))
+    os.chdir(dirname)
+
+    try:
+        process = execute_command("buildkite-agent", "artifact", "upload", basename)
+        if process.returncode:
+            raise Exception("Failed to upload {}: {}".format(path, process.stderr))
+    finally:
+        os.chdir(cwd)
+    
+    return basename
