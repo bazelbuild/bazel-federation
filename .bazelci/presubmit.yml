@@ -1,3 +1,4 @@
+bazel: 0.29.0
 imports:
 - bazel_skylib.yml
 - examples.yml
