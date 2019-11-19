@@ -1,7 +1,9 @@
 imports:
 - bazel_skylib.yml
 - examples.yml
+- protobuf.yml
 - rules_cc.yml
 - rules_java.yml
+- rules_proto.yml
 - rules_python.yml
 - tests.yml
