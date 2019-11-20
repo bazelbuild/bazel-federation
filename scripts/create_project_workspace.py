@@ -24,7 +24,7 @@ import sys
 import utils
 
 
-WORKSPACE_TEMPLATE = """workspace(name = "{repo}_federation_example")
+WORKSPACE_TEMPLATE = """workspace(name = "{project}_federation_example")
 
 local_repository(
     name = "bazel_federation",
@@ -41,21 +41,21 @@ load("@bazel_federation//setup:{project}.bzl", "{project}_setup")
 """
 
 
-INTERNAL_SETUP_TEMPLATE = """load("@bazel_federation//internal/deps:{repo}.bzl", "{project}_internal_deps")
+INTERNAL_SETUP_TEMPLATE = """load("@bazel_federation//internal/deps:{project}.bzl", "{project}_internal_deps")
 
 {project}_internal_deps()
 
-load("@bazel_federation//internal/setup:{repo}.bzl", "{project}_internal_setup")
+load("@bazel_federation//internal/setup:{project}.bzl", "{project}_internal_setup")
 
 {project}_internal_setup()
 """
 
 
-def create_new_workspace(project_name, repo_name, add_internal_setup):
-    workspace = WORKSPACE_TEMPLATE.format(project=project_name, repo=repo_name)
+def create_new_workspace(project_name, add_internal_setup):
+    workspace = WORKSPACE_TEMPLATE.format(project=project_name)
     if add_internal_setup:
         workspace = "{}\n{}".format(
-            workspace, INTERNAL_SETUP_TEMPLATE.format(project=project_name, repo=repo_name)
+            workspace, INTERNAL_SETUP_TEMPLATE.format(project=project_name)
         )
 
     return workspace
@@ -75,7 +75,6 @@ def main(argv=None):
 
     parser = argparse.ArgumentParser(description="Bazel Federation WORKSPACE Generation Script")
     parser.add_argument("--project", type=str, required=True)
-    parser.add_argument("--repo", type=str)
     parser.add_argument("--internal", type=int, default=1)
     # TODO(https://github.com/bazelbuild/bazel-federation/issues/78): Turn it into a boolean
     # flag that defaults to False once all presubmit configurations have been migrated.
@@ -83,7 +82,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     try:
-        content = create_new_workspace(args.project, args.repo or args.project, bool(args.internal))
+        content = create_new_workspace(args.project, bool(args.internal))
         set_up_project(args.project, content)
     except Exception as ex:
         utils.eprint(ex)

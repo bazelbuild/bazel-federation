@@ -111,9 +111,7 @@ def transform_config(project_name, repository_name, config):
         ws_script_path = utils.get_script_path("create_project_workspace.py")
         task_config["setup"] = [
             "{} {}".format(python, patch_script_path),
-            "{} {} --project={} --repo={}".format(
-                python, ws_script_path, project_name, repository_name
-            ),
+            "{} {} --project={}".format(python, ws_script_path, project_name,),
         ]
         for field in ("run_targets", "build_targets", "test_targets"):
             targets = task_config.get(field)
