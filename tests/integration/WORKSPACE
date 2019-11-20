@@ -13,7 +13,6 @@ load("@bazel_federation//:repositories.bzl",
      "rules_java",
      "rules_pkg",
      "rules_python",
-     "rules_rust",
 )
 
 rules_cc()
@@ -31,11 +30,6 @@ rules_java_setup()
 rules_python()
 load("@bazel_federation//setup:rules_python.bzl", "rules_python_setup")
 rules_python_setup()
-
-rules_rust()
-load("@bazel_federation//setup:rules_rust.bzl", "rules_rust_setup")
-rules_rust_setup()
-
 
 bazel_skylib()
 load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")

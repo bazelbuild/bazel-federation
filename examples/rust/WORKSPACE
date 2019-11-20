@@ -1,9 +1,0 @@
-workspace(name = "bazel_federation_rust")
-
-local_repository(name = "bazel_federation", path = "../..")
-
-load("@bazel_federation//:repositories.bzl", "rules_rust")
-rules_rust()
-
-load("@bazel_federation//setup:rules_rust.bzl", "rules_rust_setup")
-rules_rust_setup()
