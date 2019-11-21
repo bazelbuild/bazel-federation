@@ -203,11 +203,11 @@ def load_master_config():
         return yaml.safe_load(fd)
 
 
-def save_config_file(file_name, config):
+def save_config_file(file_name, config, overwrite=True):
     directory = os.path.dirname(MASTER_CONFIG_FILE)
     path = os.path.join(directory, file_name)
-    with open(path, "w") as f:
-        f.write(yaml.dump(config, default_flow_style=False))
+    content = yaml.dump(config, default_flow_style=False)
+    write_file(path, content, overwrite)
 
 
 def create_bzl_file(project, repo, internal=True, kind="setup"):
@@ -234,6 +234,14 @@ def create_bzl_file(project, repo, internal=True, kind="setup"):
 
     path_parts = MakeParts() + [kind, "{}.bzl".format(project)]
     path = os.path.join(*path_parts)
+    write_file(path, content, overwrite=False)
+
+
+def write_file(path, content, overwrite=True):
+    if os.path.exists(path) and not overwrite:
+        print("File {} already exists".format(path))
+        return
+
     with open(path, "w") as f:
         f.write(content)
 
@@ -276,7 +284,7 @@ def main(argv=None):
         repo = args.repo or project_name
         config = transform_config(project_name, repo, load_config(args.config_url))
         update_master_config(project_name)
-        save_config_file("%s.yml" % project_name, config)
+        save_config_file("%s.yml" % project_name, config, overwrite=False)
 
         create_bzl_file(project_name, repo, internal=False, kind="setup")
         create_bzl_file(project_name, repo, internal=True, kind="setup")
