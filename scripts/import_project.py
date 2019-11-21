@@ -14,11 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A script for creating a CI presubmit configuration that can be used in the federation test pipeline.
-# It can either generate a standard configuration, or take the yaml configuration of a "regular" presubmit pipeline
-# and generate a modified version that can be used to test a project as part of the federation.
-# In both cases the script places the generated file in the right directory and registers the config in the master
-# config file.
+# A script for importing a new federation project. It automates several tasks:
+#
+# 1. Creation of a CI presubmit configuration that can be used in the federation test pipeline: The script
+#    can either generate a standard configuration, or take the yaml configuration of a "regular" presubmit pipeline
+#    and generate a modified version that can be used to test a project as part of the federation.
+#    In both cases the script places the generated file in the right directory and registers the config in the master
+#    config file.
+# 2. Generation of boilerplate bzl files: It generates templates for required bzl files in several locations:
+#    setup/$project.bzl, internal/deps/$project.bzl and internal/setup/$project.bzl
 
 import argparse
 import codecs
@@ -65,6 +69,38 @@ tasks:
     test_targets:
     - "..."
 """
+
+
+HEADER = """# Copyright 2019 The Bazel Authors. All rights reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+
+# """Setup for {project}"""
+# """Setup for {project} tests and tools.
+# """Dependencies for {project} tests and tools.
+
+BZL_TEMPLATE = '''{header}
+
+"""{kind} for {project}{maybe_tests}."""
+
+load("@{repo}//:REPLACE_ME.bzl", ...)
+
+def {project}_{func_suffix}():
+    pass
+'''
+
+ALLOWED_KINDS = {"setup": "Setup", "deps": "Dependencies"}
 
 
 class Error(Exception):
@@ -174,6 +210,34 @@ def save_config_file(file_name, config):
         f.write(yaml.dump(config, default_flow_style=False))
 
 
+def create_bzl_file(project, repo, internal=True, kind="setup"):
+    display_kind = ALLOWED_KINDS.get(kind)
+    if not display_kind:
+        raise ValueError("Kind must be one of {}, not {}".format(ALLOWED_KINDS.keys(), kind))
+
+    if kind == "deps" and not internal:
+        raise ValueError("Kind = 'deps' with internal = False is not allowed")
+
+    def MakeParts():
+        return ["internal"] if internal else []
+
+    suffix_parts = MakeParts() + [kind]
+
+    content = BZL_TEMPLATE.format(
+        project=project,
+        repo=repo,
+        header=HEADER,
+        kind=display_kind,
+        maybe_tests=" tests and tools" if internal else "",
+        func_suffix="_".join(suffix_parts),
+    )
+
+    path_parts = MakeParts() + [kind, "{}.bzl".format(project)]
+    path = os.path.join(*path_parts)
+    with open(path, "w") as f:
+        f.write(content)
+
+
 def main(argv=None):
     if argv is None:
         argv = sys.argv[1:]
@@ -213,6 +277,10 @@ def main(argv=None):
         config = transform_config(project_name, repo, load_config(args.config_url))
         update_master_config(project_name)
         save_config_file("%s.yml" % project_name, config)
+
+        create_bzl_file(project_name, repo, internal=False, kind="setup")
+        create_bzl_file(project_name, repo, internal=True, kind="setup")
+        create_bzl_file(project_name, repo, internal=True, kind="deps")
     except Exception as ex:
         utils.eprint("".join(traceback.format_exception(None, ex, ex.__traceback__)))
         return 1
