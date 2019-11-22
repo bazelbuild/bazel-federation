@@ -17,7 +17,7 @@ def assert_unmodified_repositories(previous_existing_rules, whitelist=None):
             if rule[key] != previous_existing_rules[name][key]:
                 violations.append(
                     "{} {}: attribute {} was changed from {} to {}".format(
-                        rule["kind"], name, field, rule[key], previous_existing_rules[name][key]
+                        rule["kind"], name, key, rule[key], previous_existing_rules[name][key]
                     )
                 )
 
