@@ -1,4 +1,5 @@
 def assert_unmodified_repositories(previous_existing_rules, whitelist=None):
+    """This function ensures that no http_archive or git_repository deps have been added or modified."""
     whitelist = {w: False for w in whitelist or []}
     violations = ["Illegal modification of external dependencies:"]
 
