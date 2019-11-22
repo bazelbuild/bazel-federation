@@ -1,8 +1,12 @@
 imports:
+- bazel_gazelle.yml
 - bazel_skylib.yml
+- bazel_toolchains.yml
 - examples.yml
 - protobuf.yml
 - rules_cc.yml
+- rules_docker.yml
+- rules_go.yml
 - rules_java.yml
 - rules_proto.yml
 - rules_python.yml

@@ -1,0 +1,152 @@
+buildifier:
+  version: 0.22.0
+  warnings: attr-cfg,attr-license,attr-non-empty,attr-output-default,attr-single-file,confusing-name,constant-glob,ctx-actions,ctx-args,depset-iteration,depset-union,dict-concatenation,duplicated-name,filetype,function-docstring,git-repository,http-archive,integer-division,load,load-on-top,module-docstring,name-conventions,native-build,native-package,no-effect,out-of-order-load,output-group,package-name,package-on-top,redefined-variable,repository-name,same-origin-load,string-iteration,unreachable,unsorted-dict-items,unused-variable
+platforms:
+  macos:
+    build_flags:
+    - --action_env=PATH
+    - --define=ENV_KEY=my_key
+    - --define=ENV_VALUE=my_value
+    - --extra_execution_platforms=@local_config_platform//:host,@io_bazel_rules_docker//platforms:local_container_platform
+    build_targets:
+    - --
+    - '@io_bazel_rules_docker//tests/container/...'
+    - -@io_bazel_rules_docker//testing/new_pusher_tests/...
+    setup:
+    - python3.7 scripts/patch_repositories.py
+    - python3.7 scripts/create_project_workspace.py --project=rules_docker
+    test_flags:
+    - --action_env=PATH
+    - --define=ENV_KEY=my_key
+    - --define=ENV_VALUE=my_value
+    - --test_output=errors
+    - --extra_execution_platforms=@local_config_platform//:host,@io_bazel_rules_docker//platforms:local_container_platform
+    test_targets:
+    - --
+    - '@io_bazel_rules_docker//tests/container:alpine_custom_attr_digest_test'
+    - '@io_bazel_rules_docker//tests/container:alpine_linux_armv6_tar_test_image_tar'
+    - '@io_bazel_rules_docker//tests/container:basic_windows_image_test'
+    - '@io_bazel_rules_docker//tests/container:build_tar_test'
+    - '@io_bazel_rules_docker//tests/container:distroless_fixed_id_digest_test'
+    - '@io_bazel_rules_docker//tests/container:distroless_fixed_id_image_digest_test'
+    - '@io_bazel_rules_docker//tests/container:k8s_pause_arm64_digest_test'
+    - '@io_bazel_rules_docker//tests/container:new_alpine_linux_armv6_image_tar_digest_test'
+    - '@io_bazel_rules_docker//tests/container:new_alpine_linux_ppc64le_image_oci_go_join_layers_test'
+    - '@io_bazel_rules_docker//tests/container:new_distroless_base_oci_test_0_tar_gz'
+    - '@io_bazel_rules_docker//tests/container:new_distroless_base_oci_test_config'
+    - '@io_bazel_rules_docker//tests/container:pause_tar_test_0_tar_gz'
+    - '@io_bazel_rules_docker//tests/container:pause_tar_test_1_tar_gz'
+    - '@io_bazel_rules_docker//tests/container:pause_tar_test_config'
+    - '@io_bazel_rules_docker//tests/container:set_cmd_test_host'
+    - '@io_bazel_rules_docker//tests/container:special_characters_test'
+    - '@io_bazel_rules_docker//tests/container:test_digest_output1'
+    - '@io_bazel_rules_docker//tests/container:test_digest_output2'
+    - '@io_bazel_rules_docker//tests/container:test_push_digest_output'
+    - '@io_bazel_rules_docker//tests/contrib:rename_image_test'
+    - '@io_bazel_rules_docker//tests/contrib:test_compare_ids_test'
+    - '@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_diff_ids_fails_no_regex'
+    - '@io_bazel_rules_docker//tests/contrib:test_id_compare_ids_test'
+    - '@io_bazel_rules_docker//tests/docker/package_managers:test_download_pkgs_docker_cp'
+    - '@io_bazel_rules_docker//tests/docker/package_managers:test_download_pkgs_docker_run'
+    - '@io_bazel_rules_docker//tests/docker/package_managers:test_download_pkgs_rule'
+    - '@io_bazel_rules_docker//tests/docker/package_managers:test_install_pkgs_rule'
+    - '@io_bazel_rules_docker//tests/docker/util:test_container_commit_rule'
+    - '@io_bazel_rules_docker//tests/docker/util:test_container_extract_rule'
+    - '@io_bazel_rules_docker//tests/docker/util:test_extract_script'
+    - -@io_bazel_rules_docker//testing/new_pusher_tests/...
+  rbe_ubuntu1604:
+    build_flags:
+    - --extra_toolchains=@buildkite_config//config:cc-toolchain,//toolchains:rbe_container_cc_toolchain
+    - --extra_execution_platforms=@buildkite_config//config:platform,//platforms:rbe_container_platform
+    - --host_platform=@buildkite_config//config:platform
+    - --platforms=@buildkite_config//config:platform
+    - --keep_going
+    - --define=ENV_KEY=my_key
+    - --define=ENV_VALUE=my_value
+    build_targets:
+    - --
+    - '@io_bazel_rules_docker//...'
+    - -@io_bazel_rules_docker//tests/docker/security/...
+    - -@io_bazel_rules_docker//tests/contrib:derivative_with_volume_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:random_file_img_non_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:rbe-test-xenial_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:set_cmd_repro_test
+    - -@io_bazel_rules_docker//testing/new_pusher_tests/...
+    setup:
+    - python3.6 scripts/patch_repositories.py
+    - python3.6 scripts/create_project_workspace.py --project=rules_docker
+    test_flags:
+    - --extra_toolchains=@buildkite_config//config:cc-toolchain,//toolchains:rbe_container_cc_toolchain
+    - --extra_execution_platforms=@buildkite_config//config:platform,//platforms:rbe_container_platform
+    - --host_platform=@buildkite_config//config:platform
+    - --platforms=@buildkite_config//config:platform
+    - --keep_going
+    - --define=ENV_KEY=my_key
+    - --define=ENV_VALUE=my_value
+    - --test_output=errors
+    test_targets:
+    - --
+    - '@io_bazel_rules_docker//:structure_test_at_workspace_root'
+    - '@io_bazel_rules_docker//tests/...'
+    - -@io_bazel_rules_docker//tests/docker/security/...
+    - -@io_bazel_rules_docker//tests/contrib:derivative_with_volume_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:random_file_img_non_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:rbe-test-xenial_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:set_cmd_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_diff_ids_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_invalid_tar_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_invalid_tar_fails_multi_regex
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_no_images_with_id_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_one_tar_no_id_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_wrong_id_fails
+    - -@io_bazel_rules_docker//testing/new_pusher_tests/...
+    - -@io_bazel_rules_docker//tests/contrib/automatic_container_release:configs_test
+    - -@io_bazel_rules_docker//tests/contrib/automatic_container_release:configs_test_deps_spec_only
+  ubuntu1604:
+    setup:
+    - python3.6 scripts/patch_repositories.py
+    - python3.6 scripts/create_project_workspace.py --project=rules_docker
+    test_flags:
+    - --action_env=PATH
+    - --define=ENV_KEY=my_key
+    - --define=ENV_VALUE=my_value
+    - --test_output=errors
+    test_targets:
+    - --
+    - '@io_bazel_rules_docker//...'
+    - -@io_bazel_rules_docker//tests/docker/security/...
+    - -@io_bazel_rules_docker//tests/contrib:derivative_with_volume_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:random_file_img_non_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:rbe-test-xenial_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:set_cmd_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_diff_ids_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_invalid_tar_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_invalid_tar_fails_multi_regex
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_no_images_with_id_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_one_tar_no_id_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_wrong_id_fails
+    - -@io_bazel_rules_docker//testing/new_pusher_tests/...
+  ubuntu1804:
+    setup:
+    - python3.6 scripts/patch_repositories.py
+    - python3.6 scripts/create_project_workspace.py --project=rules_docker
+    test_flags:
+    - --action_env=PATH
+    - --define=ENV_KEY=my_key
+    - --define=ENV_VALUE=my_value
+    - --test_output=errors
+    test_targets:
+    - --
+    - '@io_bazel_rules_docker//...'
+    - -@io_bazel_rules_docker//tests/docker/security/...
+    - -@io_bazel_rules_docker//tests/contrib:derivative_with_volume_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:random_file_img_non_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:rbe-test-xenial_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:set_cmd_repro_test
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_diff_ids_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_invalid_tar_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_invalid_tar_fails_multi_regex
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_no_images_with_id_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_one_tar_no_id_fails
+    - -@io_bazel_rules_docker//tests/contrib:test_compare_ids_test_wrong_id_fails
+    - -@io_bazel_rules_docker//testing/new_pusher_tests/...

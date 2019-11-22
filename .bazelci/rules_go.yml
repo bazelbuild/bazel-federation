@@ -1,0 +1,340 @@
+platforms:
+  macos:
+    build_targets:
+    - '@io_bazel_rules_go//...'
+    setup:
+    - python3.7 scripts/patch_repositories.py
+    - python3.7 scripts/create_project_workspace.py --project=rules_go
+    test_targets:
+    - '@io_bazel_rules_go//...'
+  rbe_ubuntu1604:
+    build_targets:
+    - '@io_bazel_rules_go//...'
+    setup:
+    - python3.6 scripts/patch_repositories.py
+    - python3.6 scripts/create_project_workspace.py --project=rules_go
+    test_flags:
+    - --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=0
+    - --test_tag_filters=-local
+    test_targets:
+    - --
+    - '@io_bazel_rules_go//...'
+    - -@io_bazel_rules_go//tests/core/go_path:go_path_test
+    - -@io_bazel_rules_go//tests/core/stdlib:buildid_test
+  ubuntu1604:
+    bazel: 0.23.0
+    build_targets:
+    - '@io_bazel_rules_go//...'
+    setup:
+    - python3.6 scripts/patch_repositories.py
+    - python3.6 scripts/create_project_workspace.py --project=rules_go
+    test_targets:
+    - '@io_bazel_rules_go//...'
+  ubuntu1804:
+    build_targets:
+    - '@io_bazel_rules_go//...'
+    setup:
+    - python3.6 scripts/patch_repositories.py
+    - python3.6 scripts/create_project_workspace.py --project=rules_go
+    test_targets:
+    - '@io_bazel_rules_go//...'
+  windows:
+    build_flags:
+    - --cpu=x64_windows
+    - --compiler=mingw-gcc
+    - --action_env=PATH=PATH=C:\tools\msys64\usr\bin;C:\tools\msys64\bin;C:\tools\msys64\mingw64\bin;C:\python3\Scripts\;C:\python3;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\GooGet;C:\Program
+      Files\Google\Compute Engine\metadata_scripts;C:\Program Files (x86)\Google\Cloud
+      SDK\google-cloud-sdk\bin;C:\Program Files\Google\Compute Engine\sysprep;C:\ProgramData\chocolatey\bin;C:\Program
+      Files\Git\cmd;C:\tools\msys64\usr\bin;c:\openjdk\bin;C:\Program Files (x86)\Windows
+      Kits\8.1\Windows Performance Toolkit\;C:\Program Files\CMake\bin;c:\ninja;c:\bazel;c:\buildkite
+    build_targets:
+    - --
+    - '@io_bazel_rules_go//...'
+    - -@io_bazel_rules_go//@com_github_golang_protobuf//ptypes:go_default_library_gen
+    - -@io_bazel_rules_go//@com_google_protobuf//:any_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:api_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:compiler_plugin_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:descriptor_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:duration_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:empty_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:field_mask_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:protobuf
+    - -@io_bazel_rules_go//@com_google_protobuf//:protoc
+    - -@io_bazel_rules_go//@com_google_protobuf//:protoc_lib
+    - -@io_bazel_rules_go//@com_google_protobuf//:source_context_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:struct_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:timestamp_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:type_proto
+    - -@io_bazel_rules_go//@com_google_protobuf//:wrappers_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/rpc:code_go_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/rpc:code_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/rpc:errdetails_go_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/rpc:errdetails_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/rpc:status_go_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/rpc:status_proto
+    - -@io_bazel_rules_go//@go_googleapis//google/type:color_go_proto
+    - -@io_bazel_rules_go//@gogo_special_proto//github.com/gogo/protobuf/gogoproto:gogoproto
+    - -@io_bazel_rules_go//go/tools/bazel:go_default_test
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto:gogofaster_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto:go_grpc
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto:go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto:go_proto_bootstrap
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto:go_proto_validate
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:any_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:api_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:compiler_plugin_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:descriptor_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:duration_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:empty_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:field_mask_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:source_context_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:struct_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:timestamp_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:type_go_proto
+    - -@io_bazel_rules_go//@io_bazel_rules_go//proto/wkt:wrappers_go_proto
+    - -@io_bazel_rules_go//@org_golang_x_crypto//ed25519:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_crypto//sha3:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_sys//windows/registry:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_sys//windows/svc/eventlog:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_sys//windows/svc:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_text//language:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_tools//go/packages/packagestest:go_default_test
+    - -@io_bazel_rules_go//proto:combo_grpc
+    - -@io_bazel_rules_go//proto:combo_proto
+    - -@io_bazel_rules_go//proto:gofast_grpc
+    - -@io_bazel_rules_go//proto:gofast_proto
+    - -@io_bazel_rules_go//proto:gogofaster_grpc
+    - -@io_bazel_rules_go//proto:gogofaster_proto
+    - -@io_bazel_rules_go//proto:gogofast_grpc
+    - -@io_bazel_rules_go//proto:gogofast_proto
+    - -@io_bazel_rules_go//proto:gogo_grpc
+    - -@io_bazel_rules_go//proto:gogo_proto
+    - -@io_bazel_rules_go//proto:gogoslick_grpc
+    - -@io_bazel_rules_go//proto:gogoslick_proto
+    - -@io_bazel_rules_go//proto:gogotypes_grpc
+    - -@io_bazel_rules_go//proto:gogotypes_proto
+    - -@io_bazel_rules_go//proto:go_grpc
+    - -@io_bazel_rules_go//proto:go_proto
+    - -@io_bazel_rules_go//proto:go_proto_bootstrap
+    - -@io_bazel_rules_go//proto:go_proto_validate
+    - -@io_bazel_rules_go//proto:gostring_grpc
+    - -@io_bazel_rules_go//proto:gostring_proto
+    - -@io_bazel_rules_go//proto/wkt:any_go_proto
+    - -@io_bazel_rules_go//proto/wkt:api_go_proto
+    - -@io_bazel_rules_go//proto/wkt:compiler_plugin_go_proto
+    - -@io_bazel_rules_go//proto/wkt:descriptor_go_proto
+    - -@io_bazel_rules_go//proto/wkt:duration_go_proto
+    - -@io_bazel_rules_go//proto/wkt:empty_go_proto
+    - -@io_bazel_rules_go//proto/wkt:field_mask_go_proto
+    - -@io_bazel_rules_go//proto/wkt:source_context_go_proto
+    - -@io_bazel_rules_go//proto/wkt:struct_go_proto
+    - -@io_bazel_rules_go//proto/wkt:timestamp_go_proto
+    - -@io_bazel_rules_go//proto/wkt:type_go_proto
+    - -@io_bazel_rules_go//proto/wkt:wrappers_go_proto
+    - -@io_bazel_rules_go//@test_chdir_remote//sub:go_default_test
+    - -@io_bazel_rules_go//tests/core/cgo:dylib_client
+    - -@io_bazel_rules_go//tests/core/cgo:dylib_test
+    - -@io_bazel_rules_go//tests/core/cgo:versioned_dylib_client
+    - -@io_bazel_rules_go//tests/core/cgo:versioned_dylib_test
+    - -@io_bazel_rules_go//tests/core/coverage:coverage_test
+    - -@io_bazel_rules_go//tests/core/cross:cross_test
+    - -@io_bazel_rules_go//tests/core/go_binary:go_default_test
+    - -@io_bazel_rules_go//tests/core/go_path:go_path
+    - -@io_bazel_rules_go//tests/core/go_path:go_path_test
+    - -@io_bazel_rules_go//tests/core/go_path:nodata_path
+    - -@io_bazel_rules_go//tests/core/go_path:link_path
+    - -@io_bazel_rules_go//tests/core/go_path:copy_path
+    - -@io_bazel_rules_go//tests/core/go_path:archive_path
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:vendored
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:go_default_test
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:go_default_library
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:embed_test
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:embed_lib
+    - -@io_bazel_rules_go//tests/core/go_path/cmd/bin:cross
+    - -@io_bazel_rules_go//tests/core/go_path/cmd/bin:bin
+    - -@io_bazel_rules_go//tests/core/go_plugin:go_plugin
+    - -@io_bazel_rules_go//tests/core/go_plugin:go_default_test
+    - -@io_bazel_rules_go//tests/core/go_plugin:plugin
+    - -@io_bazel_rules_go//tests/core/go_proto_library:bar_go_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library:bar_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library:embed_go_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library:embed_test
+    - -@io_bazel_rules_go//tests/core/go_proto_library:foo_go_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library:foo_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library_importmap:foo_go_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library_importmap:foo_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library_importmap:importmap_test
+    - -@io_bazel_rules_go//tests/core/go_proto_library:transitive_go_proto
+    - -@io_bazel_rules_go//tests/core/go_proto_library:transitive_test
+    - -@io_bazel_rules_go//tests/core/go_proto_library:wrap_lib
+    - -@io_bazel_rules_go//tests/core/go_test:data_test
+    - -@io_bazel_rules_go//tests/core/go_test:pwd_test
+    - -@io_bazel_rules_go//tests/core/output_groups:compilation_outputs_test
+    - -@io_bazel_rules_go//tests/core/race:race_bin
+    - -@io_bazel_rules_go//tests/core/race:race_feature_test
+    - -@io_bazel_rules_go//tests/core/race:race_on_test
+    - -@io_bazel_rules_go//tests/core/stdlib:buildid_test
+    - -@io_bazel_rules_go//tests/examples/executable_name:executable_name
+    - -@io_bazel_rules_go//tests/integration/googleapis:color_service
+    - -@io_bazel_rules_go//tests/integration/googleapis:color_service_go_proto
+    - -@io_bazel_rules_go//tests/integration/googleapis:color_service_proto
+    - -@io_bazel_rules_go//tests/integration/googleapis:color_service_test
+    - -@io_bazel_rules_go//tests/legacy/build_with_old_sdk:build_with_old_sdk
+    - -@io_bazel_rules_go//tests/legacy/cgo_library_root_dir:cgo_library_root_dir
+    - -@io_bazel_rules_go//tests/legacy/custom_go_toolchain:custom_go_toolchain
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/example_command:example_command_test
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/example_command:example_command_script
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/example_command:example_command
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:generate_go_src
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:cgo_lib_test
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:go_default_library
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/cc_dependency:version
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/cc_dependency:c_version_so
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/cc_dependency:c_version_orig
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:sub
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/dep:useful_go_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/dep:useful_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/embed:embed_go_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/embed:embed_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/embed:go_default_library
+    - -@io_bazel_rules_go//tests/legacy/examples/proto:go_default_library
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/gogo:gogo_test
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/gogo:values_go_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/gogo:values_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/gostyle:gostyle_go_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/gostyle:gostyle_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/grpc:my_svc_go_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/grpc:my_svc_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/grpc:not_grpc
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/grpc:test_grpc
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/lib:lib_go_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/lib:lib_proto
+    - -@io_bazel_rules_go//tests/legacy/examples/proto:proto_pure_test
+    - -@io_bazel_rules_go//tests/legacy/examples/proto:proto_test
+    - -@io_bazel_rules_go//tests/legacy/extldflags_rpath:extldflags_rpath_test
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:go_default_library
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:unpack
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:str
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:single
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:local
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:flat
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:ext
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:empty
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:embedded_zip
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:embedded_tar
+    - -@io_bazel_rules_go//tests/legacy/info:info
+    - -@io_bazel_rules_go//tests/legacy/proto_ignore_go_package_option:a_go_proto
+    - -@io_bazel_rules_go//tests/legacy/proto_ignore_go_package_option:a_proto
+    - -@io_bazel_rules_go//tests/legacy/proto_ignore_go_package_option:b_go_proto
+    - -@io_bazel_rules_go//tests/legacy/proto_ignore_go_package_option:b_proto
+    - -@io_bazel_rules_go//tests/legacy/test_chdir:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/test_filter_test:test_filter_test
+    - -@io_bazel_rules_go//tests/legacy/test_rundir:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/transitive_data:go_default_test
+    - -@io_bazel_rules_go//tests/reproducibility:go_default_test
+    - -@io_bazel_rules_go//tests/reproducibility:reproducibility
+    setup:
+    - python.exe scripts/patch_repositories.py
+    - python.exe scripts/create_project_workspace.py --project=rules_go
+    test_flags:
+    - --cpu=x64_windows
+    - --compiler=mingw-gcc
+    - --action_env=PATH=PATH=C:\tools\msys64\usr\bin;C:\tools\msys64\bin;C:\tools\msys64\mingw64\bin;C:\python3\Scripts\;C:\python3;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\ProgramData\GooGet;C:\Program
+      Files\Google\Compute Engine\metadata_scripts;C:\Program Files (x86)\Google\Cloud
+      SDK\google-cloud-sdk\bin;C:\Program Files\Google\Compute Engine\sysprep;C:\ProgramData\chocolatey\bin;C:\Program
+      Files\Git\cmd;C:\tools\msys64\usr\bin;c:\openjdk\bin;C:\Program Files (x86)\Windows
+      Kits\8.1\Windows Performance Toolkit\;C:\Program Files\CMake\bin;c:\ninja;c:\bazel;c:\buildkite
+    - --test_env=LOCALAPPDATA
+    test_targets:
+    - --
+    - '@io_bazel_rules_go//...'
+    - -@io_bazel_rules_go//go/tools/bazel:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_crypto//ed25519:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_crypto//sha3:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_net//ipv4:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_sys//windows/registry:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_sys//windows/svc/eventlog:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_sys//windows/svc:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_text//language:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_tools//cmd/splitdwarf/internal/macho:go_default_test
+    - -@io_bazel_rules_go//@org_golang_x_tools//go/packages/packagestest:go_default_test
+    - -@io_bazel_rules_go//@test_chdir_remote//sub:go_default_test
+    - -@io_bazel_rules_go//tests/core/cgo/objc:objc_test
+    - -@io_bazel_rules_go//tests/core/cgo:race_test
+    - -@io_bazel_rules_go//tests/core/cgo:opts_test
+    - -@io_bazel_rules_go//tests/core/cgo:opts
+    - -@io_bazel_rules_go//tests/core/cgo:dylib_test
+    - -@io_bazel_rules_go//tests/core/cgo:dylib_client
+    - -@io_bazel_rules_go//tests/core/cgo:versioned_dylib_test
+    - -@io_bazel_rules_go//tests/core/cgo:versioned_dylib_client
+    - -@io_bazel_rules_go//tests/core/cgo:cc_libs_test
+    - -@io_bazel_rules_go//tests/core/cgo:pure
+    - -@io_bazel_rules_go//tests/core/cgo:cc_srcs
+    - -@io_bazel_rules_go//tests/core/cgo:cc_deps
+    - -@io_bazel_rules_go//tests/core/cgo:c_srcs
+    - -@io_bazel_rules_go//tests/core/cgo:bar_dep
+    - -@io_bazel_rules_go//tests/core/cgo:tag_test
+    - -@io_bazel_rules_go//tests/core/coverage:coverage_test
+    - -@io_bazel_rules_go//tests/core/cross:cross_test
+    - -@io_bazel_rules_go//tests/core/go_binary:go_default_test
+    - -@io_bazel_rules_go//tests/core/go_binary:stamp_test
+    - -@io_bazel_rules_go//tests/core/go_path:go_path
+    - -@io_bazel_rules_go//tests/core/go_path:go_path_test
+    - -@io_bazel_rules_go//tests/core/go_path:link_path
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:embed_test
+    - -@io_bazel_rules_go//tests/core/go_path/pkg/lib:go_default_test
+    - -@io_bazel_rules_go//tests/core/go_plugin:go_plugin
+    - -@io_bazel_rules_go//tests/core/go_plugin:go_default_test
+    - -@io_bazel_rules_go//tests/core/go_plugin:plugin
+    - -@io_bazel_rules_go//tests/core/go_proto_library:embed_test
+    - -@io_bazel_rules_go//tests/core/go_proto_library_importmap:importmap_test
+    - -@io_bazel_rules_go//tests/core/go_proto_library:transitive_test
+    - -@io_bazel_rules_go//tests/core/go_test:data_test
+    - -@io_bazel_rules_go//tests/core/go_test:pwd_test
+    - -@io_bazel_rules_go//tests/core/nogo/coverage:coverage_test
+    - -@io_bazel_rules_go//tests/core/nogo/vet:vet_test
+    - -@io_bazel_rules_go//tests/core/output_groups:compilation_outputs_test
+    - -@io_bazel_rules_go//tests/core/race:race_auto_test
+    - -@io_bazel_rules_go//tests/core/race:race_bin
+    - -@io_bazel_rules_go//tests/core/race:race_feature_test
+    - -@io_bazel_rules_go//tests/core/race:race_on_test
+    - -@io_bazel_rules_go//tests/core/stdlib:buildid_test
+    - -@io_bazel_rules_go//tests/examples/executable_name:executable_name
+    - -@io_bazel_rules_go//tests/integration/googleapis:color_service_test
+    - -@io_bazel_rules_go//tests/legacy/build_with_old_sdk:build_with_old_sdk
+    - -@io_bazel_rules_go//tests/legacy/cgo_library_root_dir:cgo_library_root_dir
+    - -@io_bazel_rules_go//tests/legacy/custom_go_toolchain:custom_go_toolchain
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/example_command:example_command_test
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/example_command:example_command_script
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/example_command:example_command
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:generate_go_src
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:cgo_lib_test
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:go_default_library
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/cc_dependency:version
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/cc_dependency:c_version_so
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo/cc_dependency:c_version_orig
+    - -@io_bazel_rules_go//tests/legacy/examples/cgo:sub
+    - -@io_bazel_rules_go//tests/legacy/examples/proto/gogo:gogo_test
+    - -@io_bazel_rules_go//tests/legacy/examples/proto:proto_pure_test
+    - -@io_bazel_rules_go//tests/legacy/examples/proto:proto_test
+    - -@io_bazel_rules_go//tests/legacy/extldflags_rpath:extldflags_rpath_test
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:go_default_library
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:unpack
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:str
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:single
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:local
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:flat
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:ext
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:empty
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:embedded_zip
+    - -@io_bazel_rules_go//tests/legacy/go_embed_data:embedded_tar
+    - -@io_bazel_rules_go//tests/legacy/info:info
+    - -@io_bazel_rules_go//tests/legacy/test_chdir:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/test_filter_test:test_filter_test
+    - -@io_bazel_rules_go//tests/legacy/test_rundir:go_default_test
+    - -@io_bazel_rules_go//tests/legacy/transitive_data:go_default_test
+    - -@io_bazel_rules_go//tests/reproducibility:go_default_test
+    - -@io_bazel_rules_go//tests/reproducibility:reproducibility
