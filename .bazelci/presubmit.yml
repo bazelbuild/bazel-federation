@@ -3,6 +3,7 @@ imports:
 - bazel_skylib.yml
 - bazel_toolchains.yml
 - examples.yml
+- platforms.yml
 - protobuf.yml
 - rules_cc.yml
 - rules_docker.yml
