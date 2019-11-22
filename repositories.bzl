@@ -75,7 +75,6 @@ def bazel_skylib_deps():
 
 def bazel_skylib():
     bazel_skylib_deps()
-    snapshot = native.existing_rules()
     maybe(
         http_archive,
         name = "bazel_skylib",
