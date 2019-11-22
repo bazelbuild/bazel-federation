@@ -181,31 +181,107 @@ def mock_whl():
         ],
     )
 
-def org_golang_x_sys():
-    maybe(
+def org_golang_x_tools_REQUIRES_RULES_GO():
+    _maybe(
         git_repository,
-        name = "org_golang_x_sys",
-        remote = "https://github.com/golang/sys",
-        commit = "e4b3c5e9061176387e7cea65e4dc5853801f3fb7",  # master as of 2018-09-28
-        patches = ["@io_bazel_rules_go//third_party:org_golang_x_sys-gazelle.patch"],
-        patch_args = ["-p1"],
-        # gazelle args: -go_prefix golang.org/x/sys
-    )
-
-def org_golang_x_tools():
-    maybe(
-        http_archive,
         name = "org_golang_x_tools",
-        # master^1, as of 2018-11-02 (master is currently broken)
-        urls = ["https://codeload.github.com/golang/tools/zip/92b943e6bff73e0dfe9e975d94043d8f31067b06"],
-        strip_prefix = "tools-92b943e6bff73e0dfe9e975d94043d8f31067b06",
-        type = "zip",
+        remote = "https://go.googlesource.com/tools",
+        # master (latest) as of 2019-10-05
+        commit = "c9f9432ec4b21a28c4d47f172513698febb68e9c",
         patches = [
+            "@io_bazel_rules_go//third_party:org_golang_x_tools-deletegopls.patch",
             "@io_bazel_rules_go//third_party:org_golang_x_tools-gazelle.patch",
             "@io_bazel_rules_go//third_party:org_golang_x_tools-extras.patch",
         ],
         patch_args = ["-p1"],
+        shallow_since = "1570239844 +0000",
         # gazelle args: -go_prefix golang.org/x/tools
+    )
+
+def com_github_golang_protobuf_REQUIRES_RULES_GO():
+    # Go protoc plugin and runtime library
+    # We need to apply a patch to enable both go_proto_library and
+    # go_library with pre-generated sources.
+    _maybe(
+        git_repository,
+        name = "com_github_golang_protobuf",
+        remote = "https://github.com/golang/protobuf",
+        # v1.3.1 (latest) as of 2019-10-05
+        commit = "6c65a5562fc06764971b7c5d05c76c75e84bdbf7",
+        shallow_since = "1562005321 -0700",
+        patches = [
+            "@io_bazel_rules_go//third_party:com_github_golang_protobuf-gazelle.patch",
+            "@io_bazel_rules_go//third_party:com_github_golang_protobuf-extras.patch",
+        ],
+        patch_args = ["-p1"],
+        # gazelle args: -go_prefix github.com/golang/protobuf -proto disable_global
+    )
+
+def com_github_mwitkow_go_proto_validators_REQUIRES_RULES_GO():
+    # Extra protoc plugins and libraries.
+    # Doesn't belong here, but low maintenance.
+    _maybe(
+        git_repository,
+        name = "com_github_mwitkow_go_proto_validators",
+        remote = "https://github.com/mwitkow/go-proto-validators",
+        # v0.2.0 (latest) as of 2019-10-05
+        commit = "d70d97bb65387105677cb21cee7318e4feb7b4b0",
+        shallow_since = "1568733758 +0100",
+        patches = ["@io_bazel_rules_go//third_party:com_github_mwitkow_go_proto_validators-gazelle.patch"],
+        patch_args = ["-p1"],
+        # gazelle args: -go_prefix github.com/mwitkow/go-proto-validators -proto disable
+    )
+
+def com_github_gogo_protobuf_REQUIRES_RULES_GO():
+    # Extra protoc plugins and libraries
+    # Doesn't belong here, but low maintenance.
+    _maybe(
+        git_repository,
+        name = "com_github_gogo_protobuf",
+        remote = "https://github.com/gogo/protobuf",
+        # v1.3.0 (latest) as of 2019-10-05
+        commit = "0ca988a254f991240804bf9821f3450d87ccbb1b",
+        shallow_since = "1567336231 +0200",
+        patches = ["@io_bazel_rules_go//third_party:com_github_gogo_protobuf-gazelle.patch"],
+        patch_args = ["-p1"],
+        # gazelle args: -go_prefix github.com/gogo/protobuf -proto legacy
+    )
+
+def org_golang_google_genproto_REQUIRES_RULES_GO():
+    # go_library targets with pre-generated sources for Well Known Types
+    # and Google APIs.
+    # Doesn't belong here, but it would be an annoying source of errors if
+    # this weren't generated with -proto disable_global.
+    _maybe(
+        git_repository,
+        name = "org_golang_google_genproto",
+        remote = "https://github.com/google/go-genproto",
+        # master (latest) as of 2019-10-05
+        commit = "c459b9ce5143dd819763d9329ff92a8e35e61bd9",
+        patches = ["@io_bazel_rules_go//third_party:org_golang_google_genproto-gazelle.patch"],
+        patch_args = ["-p1"],
+        # gazelle args: -go_prefix google.golang.org/genproto -proto disable_global
+    )
+
+def go_googleapis_REQUIRES_RULES_GO():
+    # go_proto_library targets for gRPC and Google APIs.
+    # TODO(rules_go#1986): migrate to com_google_googleapis. This workspace was added
+    # before the real workspace supported Bazel. Gazelle resolves dependencies
+    # here. Gazelle should resolve dependencies to com_google_googleapis
+    # instead, and we should remove this.
+    _maybe(
+        git_repository,
+        name = "go_googleapis",
+        remote = "https://github.com/googleapis/googleapis",
+        # master (latest) as of 2019-10-05
+        commit = "ceb8e2fb12f048cc94caae532ef0b4cf026a78f3",
+        shallow_since = "1570228637 -0700",
+        patches = [
+            "@io_bazel_rules_go//third_party:go_googleapis-deletebuild.patch",
+            "@io_bazel_rules_go//third_party:go_googleapis-directives.patch",
+            "@io_bazel_rules_go//third_party:go_googleapis-gazelle.patch",
+        ],
+        patch_args = ["-E", "-p1"],
     )
 
 def py_mock():
