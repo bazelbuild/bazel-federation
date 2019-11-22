@@ -14,6 +14,10 @@ def assert_unmodified_repositories(previous_existing_rules, whitelist=None):
         else:
             # TODO: extract the version for http_archive rules instead of using sha256sum as proxy
             key = "sha256sum" if rule["kind"] == "http_archive" else "commit"
+            
+            if key not in rule:
+                print(rule)
+            
             if rule[key] != previous_existing_rules[name][key]:
                 violations.append(
                     "{} {}: attribute {} was changed from {} to {}".format(
