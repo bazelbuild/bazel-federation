@@ -89,6 +89,9 @@ def bazel_skylib():
     # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
     # bazel_skylib_setup()
 
+    print("LOL")
+    print(native.existing_rules())
+
 def bazel_stardoc_deps():
     bazel_skylib()
     rules_java()
@@ -147,11 +150,11 @@ def rules_cc():
         type = "zip",
     )
 
-def rules_go_deps():
+def rules_go_deps_call_after_repo():
     bazel_skylib()
+    # TODO: https://github.com/bazelbuild/rules_go/blob/master/go/private/repositories.bzl
 
 def rules_go():
-    rules_go_deps()
     maybe(
         http_archive,
         name = "io_bazel_rules_go",
@@ -160,6 +163,10 @@ def rules_go():
         ],
         sha256 = "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
     )
+    # We need to call the deps function after defining @io_bazel_rules_go since some dependencies require
+    # patches from the repo.
+    # TODO: decide how to handle patches
+    rules_go_deps_call_after_repo()
 
 def rules_java_deps():
     # TODO(aiuto): When rules_java stabalizes, reference the deps directly.
