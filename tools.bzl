@@ -1,43 +1,61 @@
 def assert_unmodified_repositories(previous_existing_rules, whitelist=None):
-    """This function ensures that no http_archive or git_repository deps have been added or modified."""
+    """This function ensures that no repository dependencies have been added or modified."""
     whitelist = {w: False for w in whitelist or []}
     violations = ["Illegal modification of external dependencies:"]
 
     for name, rule in native.existing_rules().items():
-        if name in whitelist or not _is_relevant_rule(rule):
+        if name in whitelist:
             continue
 
         if name not in previous_existing_rules:
-            violations.append("{} {} was added".format(rule["kind"], name))
-        else:
-            key = _get_version_key(rule)
-            if rule[key] != previous_existing_rules[name][key]:
+            violations.append("{}(name = '{}') was added".format(rule["kind"], name))
+        elif rule["kind"] not in ("bind", "local_repository"):
+            prev_key, prev_value = _get_version(previous_existing_rules[name])
+            key, value = _get_version(rule)
+
+            if prev_key != key:
                 violations.append(
-                    "{} {}: attribute {} was changed from '{}' to '{}'".format(
-                        rule["kind"], name, key, rule[key], previous_existing_rules[name][key]
+                    "Repository {}: changed from {}({} = '...') to {}({} = ...)".format(
+                        name, previous_existing_rules[name]["kind"], prev_key, rule["kind"], key
+                    )
+                )
+            elif prev_value != value:
+                violations.append(
+                    "{}({}): attribute {} was changed from '{}' to '{}'".format(
+                        rule["kind"], name, key, prev_value, value
                     )
                 )
 
     if len(violations) > 1:
         fail("\n- ".join(violations))
 
-def _is_relevant_rule(rule):
-    return rule["kind"] in ("http_archive", "git_repository")
 
-def _get_version_key(rule):
-    # TODO: extract the version for http_archive rules instead of using sha256sum as proxy
-    return "sha256" if rule["kind"] == "http_archive" else "commit"
+def _get_version(rule):
+    for key in ("tag", "commit", "remote", "url"):
+        value = rule.get(key, None)
+        if value:
+            return key, value
 
-def assert_repository_has_version(name, expected_version):
+    urls = rule.get("urls", None)
+    if urls:
+        return "urls", "-".join(sorted(urls))
+
+    fail("Could not determine version for {}({})".format(rule["kind"], rule["name"]))
+
+
+def assert_repository_has_version(name, version_attr, expected_version):
     # TODO: extract the version for http_archive rules instead of using sha256sum as proxy
     rule = native.existing_rules().get(name, None)
     if not rule:
         fail("No repository '{}'".format(name))
 
-    if not _is_relevant_rule(rule):
-        fail("Unsupported rule kind '{}'".format(rule["kind"]))
+    if version_attr not in rule.keys():
+        fail("Rule kind '{}' has no attribute '{}'".format(rule["kind"], version_attr))
 
-    key = _get_version_key(rule)
-    if rule[key] != expected_version:
-        fail("{} {}: attribute {} has value '{}', not '{}'".format(rule["kind"], name, key, rule[key], expected_version))
+    if rule[version_attr] != expected_version:
+        fail(
+            "{}({}): attribute {} has value '{}', not '{}'".format(
+                rule["kind"], name, version_attr, rule[version_attr], expected_version
+            )
+        )
 
