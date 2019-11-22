@@ -2,7 +2,6 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load("//:third_party_repositories.bzl", "jinja2", "markupsafe", "mistune", "org_golang_x_sys", "org_golang_x_tools", "zlib")
-load("//:tools.bzl", "assert_unmodified_repositories", "assert_repository_has_version")
 
 # WARNING: The following definitions are placeholders since none of the projects have been tested at the versions listed in this file.
 # Please do not use them (yet). Future commits to this file will set the proper versions and ensure that all dependencies are correct.
@@ -90,9 +89,6 @@ def bazel_skylib():
     #     not do the load() here.
     # load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
     # bazel_skylib_setup()
-
-    assert_unmodified_repositories(snapshot)
-    assert_repository_has_version("bazel_skylib", "NOT 64ad2728ccdd2044216e4cec7815918b7bb3bb28c95b7e9d951f9d4eccb07625")
 
 def bazel_stardoc_deps():
     bazel_skylib()
