@@ -182,7 +182,7 @@ def mock_whl():
     )
 
 def org_golang_x_tools_REQUIRES_RULES_GO():
-    _maybe(
+    maybe(
         git_repository,
         name = "org_golang_x_tools",
         remote = "https://go.googlesource.com/tools",
@@ -202,7 +202,7 @@ def com_github_golang_protobuf_REQUIRES_RULES_GO():
     # Go protoc plugin and runtime library
     # We need to apply a patch to enable both go_proto_library and
     # go_library with pre-generated sources.
-    _maybe(
+    maybe(
         git_repository,
         name = "com_github_golang_protobuf",
         remote = "https://github.com/golang/protobuf",
@@ -220,7 +220,7 @@ def com_github_golang_protobuf_REQUIRES_RULES_GO():
 def com_github_mwitkow_go_proto_validators_REQUIRES_RULES_GO():
     # Extra protoc plugins and libraries.
     # Doesn't belong here, but low maintenance.
-    _maybe(
+    maybe(
         git_repository,
         name = "com_github_mwitkow_go_proto_validators",
         remote = "https://github.com/mwitkow/go-proto-validators",
@@ -235,7 +235,7 @@ def com_github_mwitkow_go_proto_validators_REQUIRES_RULES_GO():
 def com_github_gogo_protobuf_REQUIRES_RULES_GO():
     # Extra protoc plugins and libraries
     # Doesn't belong here, but low maintenance.
-    _maybe(
+    maybe(
         git_repository,
         name = "com_github_gogo_protobuf",
         remote = "https://github.com/gogo/protobuf",
@@ -252,7 +252,7 @@ def org_golang_google_genproto_REQUIRES_RULES_GO():
     # and Google APIs.
     # Doesn't belong here, but it would be an annoying source of errors if
     # this weren't generated with -proto disable_global.
-    _maybe(
+    maybe(
         git_repository,
         name = "org_golang_google_genproto",
         remote = "https://github.com/google/go-genproto",
@@ -269,7 +269,7 @@ def go_googleapis_REQUIRES_RULES_GO():
     # before the real workspace supported Bazel. Gazelle resolves dependencies
     # here. Gazelle should resolve dependencies to com_google_googleapis
     # instead, and we should remove this.
-    _maybe(
+    maybe(
         git_repository,
         name = "go_googleapis",
         remote = "https://github.com/googleapis/googleapis",

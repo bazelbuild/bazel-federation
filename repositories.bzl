@@ -135,7 +135,7 @@ def platforms():
     # Repository of standard constraint settings and values.
     # Bazel declares this automatically after 0.28.0, but it's better to
     # define an explicit version.
-    _maybe(
+    maybe(
         http_archive,
         name = "platforms",
         strip_prefix = "platforms-441afe1bfdadd6236988e9cac159df6b5a9f5a98",
