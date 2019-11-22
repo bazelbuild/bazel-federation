@@ -131,6 +131,21 @@ def bazel_stardoc():
     )
 
 
+def platforms():
+    # Repository of standard constraint settings and values.
+    # Bazel declares this automatically after 0.28.0, but it's better to
+    # define an explicit version.
+    _maybe(
+        http_archive,
+        name = "platforms",
+        strip_prefix = "platforms-441afe1bfdadd6236988e9cac159df6b5a9f5a98",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/platforms/archive/441afe1bfdadd6236988e9cac159df6b5a9f5a98.zip",
+            "https://github.com/bazelbuild/platforms/archive/441afe1bfdadd6236988e9cac159df6b5a9f5a98.zip",
+        ],
+        sha256 = "a07fe5e75964361885db725039c2ba673f0ee0313d971ae4f50c9b18cd28b0b5",
+    )
+
 # TODO(fweikert): delete this function if it's not needed by the protobuf project itself.
 def protobuf_deps():
     zlib()
@@ -183,6 +198,7 @@ def rules_cc():
 
 def rules_go_deps_call_after_repo():
     bazel_skylib()
+    platforms()
     org_golang_x_tools_REQUIRES_RULES_GO()
     com_github_golang_protobuf_REQUIRES_RULES_GO()
     com_github_mwitkow_go_proto_validators_REQUIRES_RULES_GO()
