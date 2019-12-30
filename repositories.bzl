@@ -83,13 +83,13 @@ def bazel_toolchains_deps():
 def bazel_toolchains():
     bazel_toolchains_deps()
     maybe(
-        http_archive,
-        name="bazel_toolchains",
-        sha256="5962fe677a43226c409316fcb321d668fc4b7fa97cb1f9ef45e7dc2676097b26",
-        strip_prefix="bazel-toolchains-be10bee3010494721f08a0fccd7f57411a1e773e",
-        urls=[
-            "https://mirror.bazel.build/github.com/bazelbuild/bazel-toolchains/archive/be10bee3010494721f08a0fccd7f57411a1e773e.tar.gz",
-            "https://github.com/bazelbuild/bazel-toolchains/archive/be10bee3010494721f08a0fccd7f57411a1e773e.tar.gz",
+        http_archive(,
+        name = "bazel_toolchains",
+        sha256 = "1e16833a9f0e32b292568c0dfee7bd48133c2038605757d3a430551394310006",
+        strip_prefix = "bazel-toolchains-1.1.0",
+        urls = [
+            "https://mirror.bazel.build/github.com/bazelbuild/bazel-toolchains/archive/1.1.0.tar.gz",
+            "https://github.com/bazelbuild/bazel-toolchains/archive/1.1.0.tar.gz",
         ],
     )
 
@@ -148,6 +148,9 @@ def platforms():
 
 # TODO(fweikert): delete this function if it's not needed by the protobuf project itself.
 def protobuf_deps():
+    rules_cc()
+    rules_java()
+    rules_python()
     zlib()
     protobuf_javalite()
 
@@ -272,6 +275,22 @@ def rules_pkg():
             "https://github.com/bazelbuild/rules_pkg/releases/download/0.2.4/rules_pkg-0.2.4.tar.gz",
         ],
         sha256="4ba8f4ab0ff85f2484287ab06c0d871dcb31cc54d439457d28fd4ae14b18450a",
+    )
+
+
+def rules_proto_deps():
+    bazel_skylib()
+    protobuf()
+
+
+def rules_proto():
+    rules_proto_deps()
+    maybe(
+        http_archive,
+        name = "rules_proto",
+        sha256 = "602e7161d9195e50246177e7c55b2f39950a9cf7366f74ed5f22fd45750cd208",
+        strip_prefix = "rules_proto-97d8af4dc474595af3900dd85cb3a29ad28cc313",
+        urls = ["https://github.com/bazelbuild/rules_proto/archive/97d8af4dc474595af3900dd85cb3a29ad28cc313.tar.gz"],
     )
 
 
