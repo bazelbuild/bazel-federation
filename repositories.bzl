@@ -146,7 +146,6 @@ def platforms():
         sha256 = "a07fe5e75964361885db725039c2ba673f0ee0313d971ae4f50c9b18cd28b0b5",
     )
 
-# TODO(fweikert): delete this function if it's not needed by the protobuf project itself.
 def protobuf_deps():
     rules_cc()
     rules_java()
@@ -159,11 +158,13 @@ def protobuf():
     protobuf_deps()
     maybe(
         http_archive,
-        name="com_google_protobuf",
-        sha256="b404fe166de66e9a5e6dab43dc637070f950cdba2a8a4c9ed9add354ed4f6525",
-        strip_prefix="protobuf-b4f193788c9f0f05d7e0879ea96cd738630e5d51",
-        # Commit from 2019-05-15, update to protobuf 3.8 when available.
-        url="https://github.com/protocolbuffers/protobuf/archive/b4f193788c9f0f05d7e0879ea96cd738630e5d51.zip",
+        name = "com_google_protobuf",
+        sha256 = "758249b537abba2f21ebc2d02555bf080917f0f2f88f4cbe2903e0e28c4187ed",
+        strip_prefix = "protobuf-3.10.0",
+        "urls": [
+            "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.10.0.tar.gz",
+            "https://github.com/protocolbuffers/protobuf/archive/v3.10.0.tar.gz",
+        ],
     )
     native.bind(name="com_google_protobuf_cc", actual="@com_google_protobuf")
     native.bind(name="com_google_protobuf_java", actual="@com_google_protobuf")

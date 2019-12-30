@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 """Dependencies for protobuf tests and tools."""
 
 def protobuf_internal_deps():
