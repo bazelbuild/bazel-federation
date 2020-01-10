@@ -20,6 +20,9 @@ internal_setup files.
 """
 
 load("@rules_cc//:internal_setup.bzl", _func = "rules_cc_internal_setup")
+load("@bazel_federation//setup:rules_proto.bzl", "rules_proto_setup")
 
 def rules_cc_internal_setup():
     _func()
+    # TODO(fweikert): merge functions
+    rules_proto_setup()

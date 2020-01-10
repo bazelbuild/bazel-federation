@@ -20,6 +20,8 @@ internal_setup files.
 """
 
 load("@rules_cc//:internal_deps.bzl", _func = "rules_cc_internal_deps")
+load("@bazel_federation//:repositories.bzl", "rules_proto")
 
 def rules_cc_internal_deps():
     _func()
+    rules_proto()
