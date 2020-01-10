@@ -14,6 +14,6 @@
 
 load("@bazel_federation//setup:common_proto_setup.bzl", "common_proto_setup")
 
-def protobuf_setup():
+def rules_proto_setup():
     common_proto_setup()
 
