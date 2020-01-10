@@ -83,7 +83,7 @@ def bazel_toolchains_deps():
 def bazel_toolchains():
     bazel_toolchains_deps()
     maybe(
-        http_archive(,
+        http_archive,
         name = "bazel_toolchains",
         sha256 = "1e16833a9f0e32b292568c0dfee7bd48133c2038605757d3a430551394310006",
         strip_prefix = "bazel-toolchains-1.1.0",
@@ -161,7 +161,7 @@ def protobuf():
         name = "com_google_protobuf",
         sha256 = "758249b537abba2f21ebc2d02555bf080917f0f2f88f4cbe2903e0e28c4187ed",
         strip_prefix = "protobuf-3.10.0",
-        "urls": [
+        urls = [
             "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.10.0.tar.gz",
             "https://github.com/protocolbuffers/protobuf/archive/v3.10.0.tar.gz",
         ],
