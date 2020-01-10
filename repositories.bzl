@@ -146,16 +146,18 @@ def platforms():
         sha256 = "a07fe5e75964361885db725039c2ba673f0ee0313d971ae4f50c9b18cd28b0b5",
     )
 
-def protobuf_deps():
+def protobuf_deps(load_rules_proto):
     rules_cc()
     rules_java()
     rules_python()
     zlib()
     protobuf_javalite()
+    if load_rules_proto:
+        rules_proto(load_protobuf=False)
 
 
-def protobuf():
-    protobuf_deps()
+def protobuf(load_rules_proto=True):
+    protobuf_deps(load_rules_proto)
     maybe(
         http_archive,
         name = "com_google_protobuf",
@@ -279,13 +281,14 @@ def rules_pkg():
     )
 
 
-def rules_proto_deps():
+def rules_proto_deps(load_protobuf):
     bazel_skylib()
-    protobuf()
+    if load_protobuf:
+        protobuf(load_rules_proto=False)
 
 
-def rules_proto():
-    rules_proto_deps()
+def rules_proto(load_protobuf=True):
+    rules_proto_deps(load_protobuf)
     maybe(
         http_archive,
         name = "rules_proto",

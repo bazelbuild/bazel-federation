@@ -12,7 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@bazel_federation//setup:common_proto_setup.bzl", "common_proto_setup")
+load("@rules_proto//proto:repositories.bzl", "rules_proto_toolchains")
 
-def protobuf_setup():
-    common_proto_setup()
+"""This file handles setup for rules_proto and protobuf.
+
+There is a dependency cycle between these two projects,
+hence the need for this file.
+"""
+
+def common_proto_setup():
+    _rules_proto_setup()
+    _protobuf_setup()
+
+def _rules_proto_setup():
+    # Do not call rules_proto_dependencies() since it also fetches dependencies of com_google_protobuf
+    rules_proto_toolchains()
+
+def _protobuf_setup():
+    pass
