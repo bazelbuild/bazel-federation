@@ -12,6 +12,7 @@ load(
     "com_github_gogo_protobuf_REQUIRES_RULES_GO",
     "org_golang_google_genproto_REQUIRES_RULES_GO",
     "go_googleapis_REQUIRES_RULES_GO",
+    "six",
     "zlib",
 )
 
@@ -150,6 +151,7 @@ def protobuf_deps(load_rules_proto):
     rules_cc()
     rules_java()
     rules_python()
+    six()
     zlib()
     protobuf_javalite()
     if load_rules_proto:
