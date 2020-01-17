@@ -148,6 +148,7 @@ def platforms():
     )
 
 def protobuf_deps(load_rules_proto):
+    bazel_skylib()
     rules_cc()
     rules_java()
     rules_python()
