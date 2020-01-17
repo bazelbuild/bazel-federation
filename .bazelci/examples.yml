@@ -64,3 +64,4 @@ tasks:
     - python.exe scripts/patch_repositories.py
     build_targets:
     - "..."
+# TODO: add example for rules_docker, based on https://github.com/bazelbuild/bazel-federation/pull/4
