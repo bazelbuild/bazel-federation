@@ -42,6 +42,7 @@ def extract_distro(project_name, archive_path):
     return dest_dir
 
 
+# TODO(fweikert): use --override_repository instead
 def rewrite_repositories_file(repositories_file, project_name, project_root):
     utils.print_group(
         "Rewriting {} to point {} at {}".format(repositories_file, project_name, project_root)
