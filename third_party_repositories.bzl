@@ -55,6 +55,17 @@ def google_cloud_language_whl():
         ],
     )
 
+def googletest():
+    maybe(
+        http_archive,
+        name = "googletest",
+        urls = [
+            "https://github.com/google/googletest/archive/5ec7f0c4a113e2f18ac2c6cc7df51ad6afc24081.tar.gz",
+        ],
+        sha256 = "0e2f36e8e403c125fd0ab02171bdb786d3b6b3875b6ccf3b2eb7969be8faecd0",
+        strip_prefix = "googletest-5ec7f0c4a113e2f18ac2c6cc7df51ad6afc24081",
+    )
+
 def grpc_whl():
     maybe(
         http_file,

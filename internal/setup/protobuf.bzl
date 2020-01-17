@@ -24,24 +24,21 @@ def protobuf_internal_setup():
         path = "examples",
     )
 
-    native.local_repository(
-        name = "submodule_gmock",
-        path = "third_party/googletest",
-    )
-
     native.bind(
         name = "python_headers",
         actual = "//util/python:python_headers",
     )
 
+    # protobuf uses a local_repository called "submodule_gmock" for googletest.
+    # We use the real googletest repo instead.
     native.bind(
         name = "gtest",
-        actual = "@submodule_gmock//:gtest",
+        actual = "@googletest//:gtest",
     )
 
     native.bind(
         name = "gtest_main",
-        actual = "@submodule_gmock//:gtest_main",
+        actual = "@googletest//:gtest_main",
     )
 
     jvm_maven_import_external(

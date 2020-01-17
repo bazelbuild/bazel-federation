@@ -14,5 +14,7 @@
 
 """Dependencies for protobuf tests and tools."""
 
+load("@bazel_federation//:third_party_repositories.bzl", "googletest")
+
 def protobuf_internal_deps():
-    pass
+    googletest()
