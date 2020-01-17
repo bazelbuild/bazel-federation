@@ -1,4 +1,4 @@
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
 load(
@@ -61,6 +61,16 @@ def bazel_gazelle():
     )
 
 
+def bazel_gpg():
+    maybe(
+        http_file,
+        name = "bazel_gpg",
+        downloaded_file_path = "bazel_gpg",
+        sha256 = "30af2ca7abfb65987cd61802ca6e352aadc6129dfb5bfc9c81f16617bc3a4416",
+        urls = ["https://bazel.build/bazel-release.pub.gpg"],
+    )
+
+
 def bazel_integration_testing_deps():
     pass  # TODO(fweikert): examine dependencies and add them, if necessary
 
@@ -78,7 +88,9 @@ def bazel_integration_testing():
 
 
 def bazel_toolchains_deps():
-    pass  # TODO(fweikert): examine dependencies and add them, if necessary
+    bazel_gpg()
+    bazel_skylib()
+    rules_docker()
 
 
 def bazel_toolchains():
@@ -202,6 +214,21 @@ def rules_cc():
         sha256="8c7e8bf24a2bf515713445199a677ee2336e1c487fa1da41037c6026de04bbc3",
         strip_prefix="rules_cc-624b5d59dfb45672d4239422fa1e3de1822ee110",
         type="zip",
+    )
+
+
+def rules_docker_deps():
+    pass
+
+
+def rules_docker():
+    rules_docker_deps()
+    maybe(
+        http_archive,
+        name = "io_bazel_rules_docker",
+        sha256 = "dc97fccceacd4c6be14e800b2a00693d5e8d07f69ee187babfd04a80a9f8e250",
+        strip_prefix = "rules_docker-0.14.1",
+        urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.14.1/rules_docker-v0.14.1.tar.gz"],
     )
 
 
