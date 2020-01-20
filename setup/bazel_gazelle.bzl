@@ -15,7 +15,19 @@
 
 """Setup for bazel_gazelle."""
 
-load("@bazel_gazelle//:REPLACE_ME.bzl", ...)
+load("@bazel_federation//:tools.bzl", "assert_unmodified_repositories")
+load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
+load("@bazel_federation//setup:rules_go.bzl", "rules_go_setup")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
 
 def bazel_gazelle_setup():
-    pass
+    bazel_skylib_setup()
+    rules_go_setup()
+
+    # Prevent gazelle from bringing in any dependencies that should be fetched from the federation.
+    # Ideally we'd refactor go_rules_dependencies() by splitting it into two methods, with one of them executing the code that we actually need here.
+    snapshot = native.existing_rules()
+    gazelle_dependencies()
+    # TODO(fweikert): add allowed deps to whitelist
+    assert_unmodified_repositories(snapshot, whitelist=[])

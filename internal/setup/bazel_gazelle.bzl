@@ -15,7 +15,7 @@
 
 """Setup for bazel_gazelle tests and tools."""
 
-load("@bazel_gazelle//:REPLACE_ME.bzl", ...)
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains")
 
 def bazel_gazelle_internal_setup():
-    pass
+    go_register_toolchains(nogo = "@bazel_gazelle//:nogo")

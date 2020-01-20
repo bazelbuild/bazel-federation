@@ -15,7 +15,6 @@
 
 """Dependencies for bazel_gazelle tests and tools."""
 
-load("@bazel_gazelle//:REPLACE_ME.bzl", ...)
 
 def bazel_gazelle_internal_deps():
     pass

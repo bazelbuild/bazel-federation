@@ -46,6 +46,7 @@ def bazel_buildtools():
 
 
 def bazel_gazelle_deps():
+    bazel_skylib()
     rules_go()
     # TODO(fweikert): add all gazelle dependencies to the federation
 
