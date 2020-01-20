@@ -94,7 +94,6 @@ BZL_TEMPLATE = '''{header}
 
 """{kind} for {project}{maybe_tests}."""
 
-load("@{repo}//:REPLACE_ME.bzl", ...)
 
 def {project}_{func_suffix}():
     pass

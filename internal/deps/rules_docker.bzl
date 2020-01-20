@@ -15,7 +15,6 @@
 
 """Dependencies for rules_docker tests and tools."""
 
-load("@io_bazel_rules_docker//:REPLACE_ME.bzl", ...)
 
 def rules_docker_internal_deps():
     pass

@@ -15,7 +15,6 @@
 
 """Setup for rules_go tests and tools."""
 
-load("@io_bazel_rules_go//:REPLACE_ME.bzl", ...)
 
 def rules_go_internal_setup():
     pass
