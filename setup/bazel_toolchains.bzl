@@ -19,6 +19,7 @@ load("@bazel_federation//:tools.bzl", "assert_unmodified_repositories")
 load(
     "@bazel_toolchains//repositories:repositories.bzl",
     bazel_toolchains_repositories = "repositories",
+    bazel_toolchains_images = "images",
 )
 load(
     "@io_bazel_rules_docker//repositories:repositories.bzl",
@@ -28,12 +29,7 @@ load(
     "@io_bazel_rules_docker//container:container.bzl",
     "container_pull",
 )
-load(
-    "//repositories:repositories.bzl",
-    bazel_toolchains_images = "images",
-)
 load("@bazel_toolchains//rules:rbe_repo.bzl", "rbe_autoconfig")
-
 
 
 def bazel_toolchains_setup():
