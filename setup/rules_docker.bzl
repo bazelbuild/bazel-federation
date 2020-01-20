@@ -15,6 +15,7 @@
 
 """Setup for rules_docker."""
 
+load("@bazel_federation//:tools.bzl", "assert_unmodified_repositories")
 load(
     "@io_bazel_rules_docker//repositories:repositories.bzl",
     container_repositories = "repositories",
@@ -22,6 +23,12 @@ load(
 load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 def rules_docker_setup():
+    snapshot = native.existing_rules()
+
+    # Same problem as above.
+    container_repositories()
+    assert_unmodified_repositories(snapshot)
+
     # TODO(fweikert): make it possible to call docker_toolchain_configure()
     # before container_repositories().
     container_repositories()
@@ -30,3 +37,5 @@ def rules_docker_setup():
     # "repositories" function(s).
     # TODO(fweikert): make it optional
     container_deps()
+
+    assert_unmodified_repositories(snapshot)
