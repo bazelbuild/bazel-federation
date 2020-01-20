@@ -1,6 +1,7 @@
 def assert_unmodified_repositories(previous_existing_rules, whitelist=None):
     """This function ensures that no repository dependencies have been added or modified."""
-    whitelist = set(whitelist or [])
+    # There are no simple sets in Starlark.
+    whitelist = {w: False for w in whitelist or []}
     violations = ["Illegal modification of external dependencies:"]
 
     for name, rule in native.existing_rules().items():
