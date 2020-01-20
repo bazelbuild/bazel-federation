@@ -13,6 +13,7 @@ load(
     "org_golang_google_genproto_REQUIRES_RULES_GO",
     "go_googleapis_REQUIRES_RULES_GO",
     "six",
+    "subpar",
     "zlib",
 )
 
@@ -218,7 +219,11 @@ def rules_cc():
 
 
 def rules_docker_deps():
-    pass
+    bazel_gazelle()
+    bazel_skylib()
+    rules_go()
+    rules_python()
+    subpar()
 
 
 def rules_docker():

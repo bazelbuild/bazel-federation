@@ -15,7 +15,18 @@
 
 """Setup for rules_docker."""
 
-load("@io_bazel_rules_docker//:REPLACE_ME.bzl", ...)
+load(
+    "@io_bazel_rules_docker//repositories:repositories.bzl",
+    container_repositories = "repositories",
+)
+load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 
 def rules_docker_setup():
-    pass
+    # TODO(fweikert): make it possible to call docker_toolchain_configure()
+    # before container_repositories().
+    container_repositories()
+
+    # This is NOT needed when going through the language lang_image
+    # "repositories" function(s).
+    # TODO(fweikert): make it optional
+    container_deps()
