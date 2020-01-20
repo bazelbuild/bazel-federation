@@ -16,14 +16,11 @@
 """Setup for bazel_toolchains."""
 
 load("@bazel_federation//:tools.bzl", "assert_unmodified_repositories")
+load("@bazel_federation//setup:rules_docker.bzl", "rules_docker_setup")
 load(
     "@bazel_toolchains//repositories:repositories.bzl",
     bazel_toolchains_repositories = "repositories",
     bazel_toolchains_images = "images",
-)
-load(
-    "@io_bazel_rules_docker//repositories:repositories.bzl",
-    container_repositories = "repositories",
 )
 load(
     "@io_bazel_rules_docker//container:container.bzl",
@@ -33,6 +30,8 @@ load("@bazel_toolchains//rules:rbe_repo.bzl", "rbe_autoconfig")
 
 
 def bazel_toolchains_setup():
+    rules_docker_setup()
+
     # We only bazel_toolchains_repositories() for registering toolchains.
     # However, we need to prevent it from bringing in any dependencies
     # that should be loaded from the federation.
@@ -40,10 +39,6 @@ def bazel_toolchains_setup():
     # with one of them executing the code that we actually need here.
     snapshot = native.existing_rules()
     bazel_toolchains_repositories()
-    assert_unmodified_repositories(snapshot)
-
-    # Same problem as above.
-    container_repositories()
     assert_unmodified_repositories(snapshot)
 
     bazel_toolchains_images()

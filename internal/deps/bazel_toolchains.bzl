@@ -17,7 +17,6 @@
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_file")
 load("@bazel_federation//:tools.bzl", "assert_unmodified_repositories")
-load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
 load(
     "@io_bazel_rules_docker//repositories:go_repositories.bzl",
     container_go_deps = "go_deps",
@@ -34,10 +33,7 @@ def bazel_toolchains_internal_deps():
     # Ideally the following code would be in a bzl file.
     snapshot = native.existing_rules()
 
-    # TOOD: move to rules_docker functions
-    container_deps()
-    assert_unmodified_repositories(snapshot)
-
+    # TOOD: move to rules_docker functions?
     container_go_deps()
     assert_unmodified_repositories(snapshot)
 
