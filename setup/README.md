@@ -6,7 +6,7 @@ They should all be of the form
 
 setup/**REPO**_setup.bzl:
 
-```
+```starlark
 load("@REPO//:workspace.bzl", "some_setup_method")
 
 def REPO_setup():

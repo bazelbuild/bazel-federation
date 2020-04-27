@@ -79,7 +79,7 @@ This involes 3 steps
 The end result is that someone who wants to use your rules will have a
 `WORKSPACE` file that looks like
 
-```
+```starlark
 workspace(name = "my_project")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
@@ -107,7 +107,7 @@ All of the top level components of the Federation are listed in
 
 We will use the stanza for `bazel_skylib` as an example.
 
-```
+```starlark
 def bazel_skylib_deps():
     pass
 
@@ -139,7 +139,7 @@ before calling any Federation methods, we will use their preferred version.
 The setup method is a bit of glue that lets the user load your dependencies
 using a method name they can predict from pattern. Example:
 
-```
+```starlark
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 
 def bazel_skylib_setup():
