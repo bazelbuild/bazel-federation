@@ -24,7 +24,7 @@ for anyone updating their code.
 
 Load the federation first
 
-```
+```starlark
 workspace(name = "my_project")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
@@ -40,7 +40,7 @@ http_archive(
 If you want to pin specific versions of some rule sets, you may do that here.
 For example, we are using a specific commit of skylib.
 
-```
+```starlark
 http_archive(
     name = "bazel_skylib",
     url = "https://github.com/bazelbuild/bazel-skylib/archive/f130d7c388e6beeb77309ba4e421c8f783b91739.zip",
@@ -52,7 +52,7 @@ http_archive(
 
 Now load the initializer methods for all the rules you want to use.
 
-```
+```starlark
 load("@bazel_federation//:repositories.bzl",
      "bazel_stardoc",
      "rules_cc",
@@ -71,7 +71,7 @@ For each rule set, follow this pattern
 The setup method will bring in any dependencies needed for the rules and do any
 toolchain setup
 
-```
+```starlark
 rules_cc()
 load("@bazel_federation//setup:rules_cc.bzl", "rules_cc_setup")
 rules_cc_setup()
