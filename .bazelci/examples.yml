@@ -1,37 +1,4 @@
 tasks:
-  rules_pkg_macos:
-    name: rules_pkg
-    working_directory: rules_pkg
-    platform: macos
-    setup:
-    - python3.7 scripts/patch_repositories.py
-    build_targets:
-    - "..."
-  rules_pkg_ubuntu1604:
-    name: rules_pkg
-    working_directory: rules_pkg
-    platform: ubuntu1604
-    setup:
-    - python3.6 scripts/patch_repositories.py
-    build_targets:
-    - "..."
-  rules_pkg_ubuntu1804:
-    name: rules_pkg
-    working_directory: rules_pkg
-    platform: ubuntu1804
-    setup:
-    - python3.6 scripts/patch_repositories.py
-    build_targets:
-    - "..."
-  rules_pkg_windows:
-    name: rules_pkg
-    working_directory: rules_pkg
-    platform: windows
-    setup:
-    - python.exe scripts/patch_repositories.py
-    build_targets:
-    - "..."
-
   stardoc_macos:
     name: Stardoc
     working_directory: stardoc
