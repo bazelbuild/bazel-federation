@@ -78,10 +78,11 @@ def bazel_skylib():
     maybe(
         http_archive,
         name = "bazel_skylib",
-        strip_prefix = "bazel-skylib-1.0.2",
-        url = "https://github.com/bazelbuild/bazel-skylib/archive/1.0.2.zip",
-        type = "zip",
-        sha256 = "64ad2728ccdd2044216e4cec7815918b7bb3bb28c95b7e9d951f9d4eccb07625",
+        urls = [
+            "https://github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
+            "https://mirror.bazel.build/github.com/bazelbuild/bazel-skylib/releases/download/1.0.3/bazel-skylib-1.0.3.tar.gz",
+        ],
+        sha256 = "1c531376ac7e5a180e0237938a2536de0c54d93f5c278634818e0efc952dd56c",
     )
     # TODO(aiuto): We should be able to call bazel_skylib_setup() here.
     #     That would register the toolchains. We can not because you can
