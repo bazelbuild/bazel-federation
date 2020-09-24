@@ -11,7 +11,8 @@ targets: &targets
   - "--"
   - "@rules_python//..."
   # TODO(https://github.com/bazelbuild/rules_python/issues/225): enable test once fixed
-  - "-@rules_python//experimental/examples/wheel/..."
+  - "-@rules_python//experimental/..."
+  - "-@rules_python//examples/pip/boto/..."
 platforms:
   macos:
     setup:
