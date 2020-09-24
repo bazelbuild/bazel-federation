@@ -4,7 +4,6 @@ targets: &targets
   build_targets:
   - "--"
   - "@rules_python//examples/..."
-  - "@rules_python//experimental/..."
   - "@rules_python//packaging/..."
   - "@rules_python//python/..."
   - "@rules_python//tools/..."

@@ -98,7 +98,7 @@ def bazel_stardoc():
     bazel_stardoc_deps()
     maybe(
         http_archive,
-        name = "io_bazel_stardoc",
+        name = "io_bazel_skydoc",
         urls = [
             "https://mirror.bazel.build/github.com/bazelbuild/stardoc/archive/0.4.0.tar.gz",
             "https://github.com/bazelbuild/stardoc/archive/0.4.0.tar.gz",
