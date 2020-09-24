@@ -3,18 +3,14 @@ windows_targets: &windows_targets
 - "--"
 - "@bazel_skylib//..."
 # TODO: the following tests cannot be run remotely. fix them!
-- "-@bazel_skylib//tests/native_binary:args_test"
-- "-@bazel_skylib//tests/run_binary:run_bin_test"
-- "-@bazel_skylib//tests/run_binary:run_script_test"
-# TODO: this test only fails on windows due to a bug in Bazel
 - "-@bazel_skylib//tests/native_binary/..."
+- "-@bazel_skylib//tests/run_binary/..."
 targets: &targets
 - "--"
 - "@bazel_skylib//..."
 # TODO: the following tests cannot be run remotely. fix them!
-- "-@bazel_skylib//tests/native_binary:args_test"
-- "-@bazel_skylib//tests/run_binary:run_bin_test"
-- "-@bazel_skylib//tests/run_binary:run_script_test"
+- "-@bazel_skylib//tests/native_binary/..."
+- "-@bazel_skylib//tests/run_binary/..."
 common: &common
   build_targets: *targets
   test_targets: *targets
