@@ -6,16 +6,7 @@ load("@rules_cc//cc:defs.bzl", "cc_library", "cc_binary")
 load("@rules_java//java:defs.bzl", "java_library", "java_binary")
 load("@rules_python//python:defs.bzl", "py_binary")
 load("@rules_pkg//:pkg.bzl", "pkg_tar")
-
 load(":my_rule.bzl", "my_rule")
-
-bzl_library(
-    name = "my_rule",
-    srcs = [
-        "my_rule.bzl",
-    ],
-    visibility = ["//visibility:public"],
-)
 
 stardoc(
     name = "my_rule_doc",
@@ -27,7 +18,6 @@ stardoc(
     deps = [":my_rule"],
 )
 
-
 my_rule(
     name = "example",
     deps = [
@@ -36,7 +26,6 @@ my_rule(
     ],
     out = "example.txt",
 )
-
 
 # A C++ program
 
@@ -51,7 +40,6 @@ cc_library(
     srcs = ["hello_lib.cc"],
     hdrs = ["hello_lib.h"],
 )
-
 
 go_library(
     name = "lib",
@@ -106,7 +94,6 @@ rust_test(
     deps = [":rust_lib"],
 )
 
-
 pkg_tar(
     name = "tarball",
     srcs = glob(["**"]) + [
@@ -119,4 +106,10 @@ pkg_tar(
     ],
     strip_prefix = "/",
     package_dir = "federation/sample",
+)
+
+bzl_library(
+    name = "my_rule",
+    srcs = ["my_rule.bzl"],
+    visibility = ["//visibility:public"],
 )

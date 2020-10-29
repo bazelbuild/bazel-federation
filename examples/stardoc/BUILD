@@ -6,9 +6,7 @@ package(default_visibility = ["//visibility:private"])
 
 bzl_library(
     name = "my_rule",
-    srcs = [
-        "my_rule.bzl",
-    ],
+    srcs = ["my_rule.bzl"],
     visibility = ["//visibility:public"],
 )
 
@@ -22,12 +20,11 @@ stardoc(
     deps = [":my_rule"],
 )
 
-
 my_rule(
     name = "example",
+    out = "example.txt",
     deps = [
         ":BUILD",
         ":my_rule.bzl",
     ],
-    out = "example.txt",
 )
