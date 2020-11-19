@@ -145,9 +145,9 @@ def rules_cc():
     maybe(
         http_archive,
         name = "rules_cc",
-        url = "https://github.com/bazelbuild/rules_cc/archive/624b5d59dfb45672d4239422fa1e3de1822ee110.zip",
-        sha256 = "8c7e8bf24a2bf515713445199a677ee2336e1c487fa1da41037c6026de04bbc3",
-        strip_prefix = "rules_cc-624b5d59dfb45672d4239422fa1e3de1822ee110",
+        url = "https://github.com/bazelbuild/rules_cc/archive/b1c40e1de81913a3c40e5948f78719c28152486d.zip",
+        sha256 = "d0c573b94a6ef20ef6ff20154a23d0efcb409fb0e1ff0979cec318dfe42f0cdd",
+        strip_prefix = "rules_cc-b1c40e1de81913a3c40e5948f78719c28152486d",
         type = "zip",
     )
 
