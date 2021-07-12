@@ -2,7 +2,7 @@
 
 **Status:** Experimental, unmaintained and archived. Development of this project
 is on hold while we figure out how a bazel-federation should look like in the
-new Bazel LTS world.
+new Bazel LTS world. For a related project see the [bzlmod design doc](https://docs.google.com/document/d/1moQfNcEIttsk6vYanNKIy3ZuK53hQUFq1b1r0rmsYVg/edit?usp=sharing).
 
 The Bazel Federation is a set of rules at versions that have been tested
 together to ensure interoperability.
