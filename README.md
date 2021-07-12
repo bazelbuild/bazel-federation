@@ -1,6 +1,8 @@
 # Bazel Federation
 
-Experimental: do not depend on it.
+**Status:** Experimental, unmaintained and archived. Development of this project
+is on hold while we figure out how a bazel-federation should look like in the
+new Bazel LTS world.
 
 The Bazel Federation is a set of rules at versions that have been tested
 together to ensure interoperability.
